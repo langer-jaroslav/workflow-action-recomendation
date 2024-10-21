@@ -1,0 +1,1001 @@
+request_id,requested_items,request_date,status,priority,is_urgent,expected_delivery,is_from_wholesaler,delivery_location,total_value
+1,26,2024-10-07,approved,low,True,2024-10-11,True,Slovakia,7488.49
+2,14,2024-09-26,pending,high,True,2024-10-04,False,Czech Republic,1211.56
+3,29,2024-09-26,approved,low,False,2024-09-30,True,Germany,2803.71
+4,29,2024-10-19,pending,medium,True,2024-10-29,True,Czech Republic,3790.77
+5,5,2024-09-30,approved,high,False,2024-10-02,True,Hungary,1842.76
+6,38,2024-10-15,approved,medium,True,2024-10-20,True,Germany,4729.15
+7,39,2024-10-01,approved,medium,True,2024-10-02,True,Slovakia,7492.09
+8,49,2024-09-27,rejected,low,False,2024-10-04,True,Germany,2956.37
+9,15,2024-10-04,approved,medium,False,2024-10-19,False,Italy,1550.06
+10,32,2024-09-28,approved,high,False,2024-10-03,True,Hungary,6468.85
+11,47,2024-10-07,approved,low,False,2024-10-11,True,Czech Republic,4984.39
+12,18,2024-09-26,rejected,medium,False,2024-10-10,False,Poland,9446.45
+13,8,2024-10-03,approved,high,True,2024-10-05,False,Austria,6871.18
+14,37,2024-10-18,approved,medium,True,2024-10-28,True,Austria,687.89
+15,21,2024-10-14,pending,low,True,2024-10-23,False,Hungary,4190.8
+16,46,2024-10-17,pending,low,False,2024-10-26,True,Poland,3896.64
+17,36,2024-09-27,approved,low,True,2024-10-08,False,Italy,7197.31
+18,12,2024-09-21,pending,high,False,2024-09-24,False,Italy,1386.94
+19,34,2024-10-14,approved,low,True,2024-10-18,True,Germany,7095.54
+20,17,2024-09-24,approved,medium,False,2024-09-27,True,Austria,1275.94
+21,10,2024-09-26,approved,low,False,2024-09-30,True,Italy,6579.49
+22,10,2024-09-29,approved,medium,False,2024-10-04,True,Austria,6312.95
+23,40,2024-10-04,approved,low,False,2024-10-10,True,Germany,5194.99
+24,32,2024-10-05,approved,low,False,2024-10-11,False,Czech Republic,3335.04
+25,5,2024-09-23,pending,low,True,2024-09-29,False,France,3403.03
+26,19,2024-10-08,approved,medium,False,2024-10-22,False,Hungary,6081.42
+27,41,2024-10-05,approved,high,False,2024-10-15,False,Slovakia,7195.4
+28,43,2024-10-17,pending,medium,True,2024-10-24,False,Poland,4107.48
+29,35,2024-10-06,approved,high,True,2024-10-19,True,Poland,3837.19
+30,5,2024-10-02,approved,low,True,2024-10-06,True,France,7603.26
+31,39,2024-09-23,approved,medium,True,2024-10-01,False,Germany,5199.98
+32,41,2024-10-17,approved,low,True,2024-10-21,True,France,9581.22
+33,33,2024-09-26,approved,medium,False,2024-09-30,True,Germany,3270.76
+34,43,2024-10-18,approved,high,True,2024-10-23,False,Italy,6154.08
+35,15,2024-09-25,approved,high,False,2024-10-08,True,France,2056.65
+36,13,2024-10-03,approved,low,False,2024-10-11,True,Austria,5923.91
+37,49,2024-10-04,approved,high,True,2024-10-17,True,Germany,5340.39
+38,20,2024-10-19,approved,low,False,2024-10-28,True,Hungary,1928.31
+39,5,2024-09-30,approved,high,False,2024-10-02,True,Poland,7236.38
+40,50,2024-09-24,pending,medium,False,2024-10-03,False,Slovakia,4079.15
+41,4,2024-10-03,approved,high,False,2024-10-15,False,Slovakia,8369.92
+42,47,2024-10-17,approved,high,False,2024-10-24,True,Austria,9581.25
+43,14,2024-10-03,pending,medium,True,2024-10-09,False,Slovakia,2180.17
+44,30,2024-09-24,approved,low,True,2024-10-09,False,Poland,9332.44
+45,21,2024-09-29,approved,high,False,2024-10-07,True,Slovakia,3605.8
+46,45,2024-10-15,approved,high,False,2024-10-22,True,Austria,7199.71
+47,29,2024-09-29,pending,low,True,2024-10-04,False,France,1694.32
+48,12,2024-09-23,approved,low,True,2024-09-25,True,Hungary,3359.09
+49,30,2024-09-25,approved,low,True,2024-09-29,True,Czech Republic,8738.63
+50,6,2024-09-25,approved,medium,True,2024-09-29,True,France,7236.61
+51,38,2024-10-17,pending,low,True,2024-10-29,False,Hungary,2079.28
+52,20,2024-09-30,pending,medium,False,2024-10-14,False,Italy,4666.71
+53,5,2024-10-09,approved,high,False,2024-10-24,False,France,7583.55
+54,11,2024-09-23,approved,medium,False,2024-10-06,True,Poland,3822.21
+55,24,2024-10-15,approved,high,True,2024-10-26,True,Slovakia,2608.97
+56,5,2024-10-13,approved,low,True,2024-10-18,False,Austria,6965.65
+57,39,2024-10-20,approved,low,True,2024-10-21,True,France,9267.28
+58,8,2024-09-24,approved,low,False,2024-10-06,False,Slovakia,5277.43
+59,6,2024-10-09,approved,low,False,2024-10-17,False,Italy,9962.42
+60,22,2024-10-11,approved,medium,True,2024-10-16,True,Poland,4349.22
+61,37,2024-10-18,approved,high,False,2024-10-25,True,Czech Republic,6001.64
+62,30,2024-10-05,approved,low,False,2024-10-19,True,Hungary,5089.29
+63,32,2024-09-28,approved,high,False,2024-09-29,False,Austria,8141.71
+64,13,2024-10-13,approved,high,True,2024-10-27,True,France,2578.13
+65,20,2024-10-07,pending,high,False,2024-10-09,False,Austria,3931.19
+66,28,2024-10-11,approved,medium,False,2024-10-23,False,Austria,8947.94
+67,8,2024-09-28,pending,high,True,2024-10-05,False,Germany,4252.52
+68,13,2024-10-04,rejected,low,False,2024-10-13,False,Poland,1112.1
+69,13,2024-09-28,approved,low,False,2024-10-13,False,Italy,1875.88
+70,2,2024-10-03,pending,medium,True,2024-10-07,False,Slovakia,1054.03
+71,2,2024-09-29,pending,high,False,2024-10-03,False,Slovakia,2493.28
+72,24,2024-10-15,approved,high,False,2024-10-29,True,Poland,8350.25
+73,12,2024-10-19,pending,low,False,2024-10-22,True,France,8362.65
+74,10,2024-10-06,approved,low,False,2024-10-11,False,Poland,5834.05
+75,10,2024-10-10,approved,high,True,2024-10-23,True,Italy,7400.5
+76,19,2024-09-25,approved,medium,True,2024-10-06,True,Slovakia,1222.22
+77,16,2024-10-06,approved,high,False,2024-10-17,True,Germany,9256.29
+78,27,2024-09-30,approved,high,True,2024-10-06,True,Czech Republic,7933.71
+79,25,2024-09-26,approved,low,True,2024-10-08,True,Poland,4889.96
+80,50,2024-10-16,approved,high,False,2024-10-17,True,Austria,7073.34
+81,2,2024-09-26,approved,high,True,2024-10-11,True,Italy,1798.23
+82,3,2024-10-09,approved,low,False,2024-10-14,False,Slovakia,5710.96
+83,25,2024-09-30,approved,high,False,2024-10-06,True,Slovakia,7677.8
+84,28,2024-10-10,approved,high,False,2024-10-22,False,Hungary,8431.01
+85,48,2024-09-22,approved,high,False,2024-10-02,True,Italy,5237.21
+86,11,2024-09-27,approved,low,False,2024-10-08,False,Austria,7357.64
+87,7,2024-10-17,pending,low,True,2024-10-18,True,Slovakia,3264.79
+88,23,2024-10-03,pending,high,True,2024-10-04,False,Germany,9155.05
+89,46,2024-10-11,pending,low,True,2024-10-14,False,Hungary,2313.81
+90,7,2024-10-04,approved,medium,True,2024-10-19,True,Czech Republic,9347.42
+91,4,2024-09-28,approved,medium,False,2024-10-06,False,Poland,5082.15
+92,50,2024-10-01,rejected,low,False,2024-10-15,False,Poland,1885.46
+93,7,2024-09-30,approved,low,True,2024-10-14,False,Hungary,8269.49
+94,35,2024-09-30,pending,low,False,2024-10-03,False,Poland,3435.74
+95,6,2024-10-09,pending,low,False,2024-10-10,False,Poland,2687.76
+96,38,2024-09-26,approved,low,True,2024-10-08,False,Austria,7375.96
+97,38,2024-10-14,approved,medium,False,2024-10-24,True,Poland,2552.34
+98,26,2024-10-06,pending,high,True,2024-10-14,True,Hungary,4740.47
+99,24,2024-09-28,approved,high,False,2024-10-04,True,Germany,6165.41
+100,34,2024-10-18,pending,low,True,2024-11-02,False,Germany,2258.82
+101,43,2024-10-09,pending,high,False,2024-10-18,True,Poland,2769.0
+102,47,2024-09-28,approved,low,False,2024-10-07,True,France,8531.0
+103,20,2024-09-23,pending,low,True,2024-09-29,True,Italy,9375.01
+104,38,2024-10-05,pending,low,True,2024-10-15,False,Slovakia,2989.68
+105,37,2024-09-28,pending,medium,True,2024-10-07,False,Italy,6317.77
+106,26,2024-10-05,approved,low,True,2024-10-11,True,Slovakia,2000.64
+107,27,2024-09-30,approved,low,False,2024-10-11,True,Czech Republic,3977.99
+108,45,2024-10-07,approved,medium,False,2024-10-18,True,Slovakia,874.02
+109,22,2024-10-20,approved,medium,False,2024-11-03,True,France,7651.9
+110,45,2024-10-06,pending,high,True,2024-10-10,False,Hungary,1694.94
+111,5,2024-10-07,approved,medium,True,2024-10-13,True,Slovakia,8457.11
+112,46,2024-09-30,approved,medium,False,2024-10-12,True,Czech Republic,2893.71
+113,31,2024-10-19,pending,high,True,2024-10-28,False,Poland,2707.4
+114,50,2024-10-04,approved,medium,True,2024-10-09,True,Poland,4895.88
+115,28,2024-09-21,approved,low,True,2024-10-03,True,Poland,3417.23
+116,44,2024-10-06,approved,high,True,2024-10-07,True,Austria,843.19
+117,41,2024-09-28,pending,medium,True,2024-10-11,False,Czech Republic,7175.04
+118,22,2024-09-24,approved,low,True,2024-09-25,True,France,9102.59
+119,34,2024-10-11,approved,medium,True,2024-10-22,True,Slovakia,8597.92
+120,22,2024-09-27,approved,low,True,2024-10-09,True,Germany,1327.89
+121,17,2024-09-24,pending,medium,True,2024-09-30,True,France,9482.5
+122,12,2024-10-02,pending,high,True,2024-10-17,True,Germany,1240.32
+123,19,2024-10-05,approved,low,True,2024-10-12,True,Austria,7050.42
+124,41,2024-10-10,approved,high,False,2024-10-22,False,Slovakia,6435.82
+125,2,2024-09-23,approved,medium,True,2024-10-08,False,Poland,4120.8
+126,43,2024-09-29,pending,low,False,2024-10-12,True,Austria,2958.15
+127,12,2024-10-01,approved,low,False,2024-10-11,False,Czech Republic,7893.32
+128,44,2024-10-05,pending,high,False,2024-10-15,False,France,2980.28
+129,15,2024-10-05,approved,medium,True,2024-10-14,True,Italy,7745.85
+130,33,2024-10-19,approved,high,True,2024-10-31,False,Czech Republic,3189.36
+131,23,2024-10-13,approved,high,False,2024-10-27,True,Germany,6138.51
+132,25,2024-09-25,pending,low,True,2024-10-03,False,Hungary,810.26
+133,31,2024-10-04,approved,medium,False,2024-10-16,True,Slovakia,7456.26
+134,10,2024-10-19,approved,high,False,2024-10-28,False,Slovakia,6199.95
+135,14,2024-10-03,approved,medium,False,2024-10-15,False,Italy,7188.54
+136,41,2024-10-01,approved,medium,False,2024-10-16,True,Italy,1224.45
+137,37,2024-10-20,approved,high,True,2024-10-22,False,Germany,9924.83
+138,16,2024-10-18,approved,high,False,2024-10-19,True,Austria,738.85
+139,41,2024-09-28,approved,low,True,2024-10-11,False,Germany,1847.88
+140,20,2024-10-08,approved,low,False,2024-10-21,True,Slovakia,1061.21
+141,2,2024-10-07,approved,high,True,2024-10-15,True,Germany,7255.04
+142,29,2024-10-07,approved,medium,True,2024-10-17,False,Czech Republic,8722.12
+143,44,2024-10-02,approved,medium,False,2024-10-15,False,Czech Republic,1851.48
+144,47,2024-10-16,pending,high,False,2024-10-19,False,Austria,6112.42
+145,23,2024-10-15,approved,high,False,2024-10-29,True,Slovakia,9642.16
+146,9,2024-10-20,approved,low,False,2024-10-26,True,Poland,9920.81
+147,4,2024-09-26,approved,medium,False,2024-10-01,False,Austria,6387.31
+148,1,2024-09-29,pending,high,False,2024-10-10,False,Germany,4081.61
+149,49,2024-09-25,pending,high,False,2024-10-03,False,Austria,2491.97
+150,10,2024-10-03,approved,high,True,2024-10-17,False,France,3787.67
+151,3,2024-10-06,approved,low,True,2024-10-15,True,Italy,912.89
+152,29,2024-09-25,approved,low,False,2024-10-07,True,Hungary,9563.07
+153,27,2024-09-28,approved,medium,True,2024-10-07,True,France,2027.16
+154,20,2024-10-01,pending,low,True,2024-10-06,True,Austria,6363.36
+155,11,2024-10-11,pending,high,True,2024-10-15,False,Italy,1372.6
+156,7,2024-10-10,approved,medium,True,2024-10-24,True,Italy,6927.43
+157,23,2024-10-09,approved,medium,False,2024-10-12,True,Poland,6509.68
+158,49,2024-09-29,pending,high,False,2024-10-05,False,Hungary,1227.2
+159,8,2024-10-11,approved,medium,False,2024-10-21,True,Germany,1616.92
+160,14,2024-10-03,approved,medium,True,2024-10-13,True,Germany,1428.07
+161,2,2024-09-23,approved,high,True,2024-10-02,False,Slovakia,7606.54
+162,41,2024-10-08,approved,high,True,2024-10-15,True,Italy,5174.77
+163,20,2024-10-17,approved,high,False,2024-10-22,False,Austria,8431.24
+164,21,2024-10-11,approved,medium,False,2024-10-22,True,Germany,6761.42
+165,22,2024-10-17,pending,medium,True,2024-10-25,False,Hungary,6039.3
+166,27,2024-10-01,approved,low,False,2024-10-06,True,Italy,4329.58
+167,7,2024-09-29,approved,high,True,2024-10-13,True,Hungary,8039.22
+168,4,2024-09-27,pending,high,False,2024-09-30,True,Hungary,1885.4
+169,17,2024-10-17,approved,medium,True,2024-10-22,True,Slovakia,3710.47
+170,36,2024-10-07,approved,high,False,2024-10-08,True,Czech Republic,6211.0
+171,42,2024-10-01,approved,low,True,2024-10-15,True,Slovakia,9116.79
+172,49,2024-10-14,pending,medium,True,2024-10-15,False,Germany,4311.18
+173,17,2024-10-12,approved,low,True,2024-10-22,True,France,8296.48
+174,28,2024-10-18,pending,high,True,2024-10-31,True,France,6290.42
+175,25,2024-10-18,approved,medium,True,2024-10-21,True,Poland,3898.06
+176,25,2024-09-21,approved,medium,False,2024-09-24,False,Hungary,2223.93
+177,18,2024-10-15,pending,low,True,2024-10-20,False,Slovakia,5768.28
+178,6,2024-10-17,approved,high,True,2024-10-25,True,Czech Republic,5090.15
+179,8,2024-10-20,approved,low,True,2024-11-01,True,Germany,4032.93
+180,10,2024-09-23,approved,medium,False,2024-10-02,False,Slovakia,9678.32
+181,24,2024-10-12,approved,medium,True,2024-10-21,False,Hungary,8164.95
+182,38,2024-09-28,approved,medium,True,2024-10-07,False,Austria,4715.36
+183,39,2024-09-24,approved,medium,True,2024-10-02,True,Czech Republic,760.54
+184,49,2024-10-11,approved,high,True,2024-10-24,False,France,7055.18
+185,42,2024-10-11,rejected,low,False,2024-10-15,False,Germany,5658.33
+186,44,2024-10-07,approved,low,False,2024-10-08,True,Czech Republic,1194.32
+187,1,2024-10-08,approved,medium,True,2024-10-16,True,Slovakia,534.46
+188,11,2024-10-04,approved,high,True,2024-10-13,False,Slovakia,6677.89
+189,20,2024-09-21,pending,low,True,2024-10-06,True,Hungary,4108.22
+190,22,2024-10-13,approved,medium,False,2024-10-28,False,Austria,7930.32
+191,20,2024-09-21,approved,medium,False,2024-09-29,False,France,9827.65
+192,50,2024-10-04,pending,low,False,2024-10-09,False,Poland,7233.26
+193,3,2024-09-23,approved,low,True,2024-10-01,True,Germany,6115.24
+194,15,2024-10-10,approved,medium,False,2024-10-15,True,Slovakia,1540.43
+195,26,2024-09-26,pending,medium,True,2024-10-09,True,Germany,2003.53
+196,16,2024-10-11,pending,high,True,2024-10-20,False,Austria,547.96
+197,34,2024-10-08,approved,medium,False,2024-10-18,True,France,8322.11
+198,39,2024-09-30,pending,medium,True,2024-10-02,False,France,3813.16
+199,17,2024-10-06,approved,medium,True,2024-10-21,True,Hungary,2554.7
+200,30,2024-10-15,rejected,medium,False,2024-10-29,True,Poland,8124.45
+201,17,2024-10-05,approved,low,False,2024-10-06,False,Poland,5201.59
+202,28,2024-10-09,rejected,medium,False,2024-10-11,False,Italy,1399.09
+203,35,2024-10-16,approved,low,True,2024-10-28,True,Czech Republic,8608.78
+204,3,2024-10-20,pending,low,False,2024-11-03,False,Germany,7564.63
+205,1,2024-09-30,approved,low,True,2024-10-02,True,Austria,1254.51
+206,24,2024-10-09,approved,medium,True,2024-10-16,True,Czech Republic,8554.88
+207,36,2024-10-11,approved,low,True,2024-10-13,False,Poland,6724.72
+208,24,2024-10-18,approved,low,True,2024-10-27,True,Hungary,4614.54
+209,20,2024-10-09,approved,low,False,2024-10-18,True,Austria,5380.27
+210,16,2024-10-15,pending,medium,False,2024-10-28,False,France,4424.19
+211,28,2024-10-08,approved,medium,True,2024-10-15,True,Italy,6806.38
+212,26,2024-10-02,pending,medium,True,2024-10-05,False,Poland,1951.11
+213,5,2024-10-14,approved,low,True,2024-10-18,True,Czech Republic,3720.88
+214,1,2024-10-10,approved,medium,False,2024-10-13,True,Germany,3129.22
+215,40,2024-10-13,approved,medium,True,2024-10-26,False,Poland,7633.79
+216,44,2024-09-21,approved,medium,False,2024-10-03,True,Slovakia,7636.63
+217,11,2024-10-14,approved,low,True,2024-10-15,True,Slovakia,2430.67
+218,14,2024-10-19,approved,high,True,2024-11-01,True,France,3431.29
+219,4,2024-09-29,pending,high,False,2024-10-02,False,Austria,3331.4
+220,42,2024-10-06,approved,low,True,2024-10-15,True,Italy,6932.74
+221,49,2024-09-24,pending,high,False,2024-10-09,False,Czech Republic,2497.57
+222,37,2024-10-14,approved,high,True,2024-10-19,True,Italy,780.61
+223,5,2024-09-22,pending,medium,True,2024-09-26,True,Czech Republic,6963.72
+224,21,2024-09-30,rejected,low,False,2024-10-13,False,Italy,2979.25
+225,47,2024-10-01,approved,low,False,2024-10-10,False,France,5897.66
+226,42,2024-10-01,pending,low,True,2024-10-11,False,Hungary,2920.79
+227,26,2024-10-14,approved,high,False,2024-10-19,True,Austria,4082.99
+228,12,2024-10-06,approved,high,True,2024-10-12,False,Germany,9086.4
+229,12,2024-10-17,approved,low,False,2024-10-28,False,Germany,4189.01
+230,45,2024-10-14,pending,high,True,2024-10-22,False,Austria,9361.98
+231,30,2024-09-27,approved,medium,True,2024-10-02,False,Czech Republic,5435.09
+232,47,2024-10-08,approved,high,False,2024-10-22,True,Italy,5702.04
+233,20,2024-09-24,approved,low,False,2024-10-03,True,France,2477.16
+234,39,2024-09-27,approved,high,True,2024-10-03,False,Slovakia,9168.2
+235,8,2024-10-20,approved,medium,True,2024-11-02,True,France,8494.26
+236,10,2024-10-14,approved,medium,False,2024-10-24,False,Czech Republic,9485.18
+237,49,2024-10-12,approved,low,False,2024-10-26,True,Slovakia,3946.35
+238,19,2024-09-22,approved,high,True,2024-10-01,True,Slovakia,1937.64
+239,23,2024-10-08,pending,low,False,2024-10-15,False,Hungary,3951.34
+240,23,2024-10-10,pending,high,False,2024-10-25,True,Slovakia,3301.64
+241,35,2024-10-19,approved,high,True,2024-10-26,True,Poland,4010.84
+242,13,2024-09-24,pending,high,True,2024-10-09,False,Poland,3477.41
+243,11,2024-10-03,approved,low,True,2024-10-05,False,Austria,6162.62
+244,46,2024-10-16,approved,medium,False,2024-10-25,False,Germany,5859.0
+245,47,2024-10-11,approved,low,False,2024-10-22,True,Poland,6636.44
+246,15,2024-10-08,approved,medium,True,2024-10-19,True,France,9026.83
+247,26,2024-10-05,pending,high,True,2024-10-15,False,Germany,3018.95
+248,3,2024-09-25,pending,medium,True,2024-10-05,False,Slovakia,1893.94
+249,19,2024-09-30,pending,high,False,2024-10-06,True,Poland,2826.39
+250,3,2024-10-14,approved,low,True,2024-10-26,False,Germany,1723.38
+251,9,2024-10-14,pending,medium,True,2024-10-27,False,Poland,3112.8
+252,41,2024-10-06,pending,low,False,2024-10-12,False,France,2026.33
+253,6,2024-10-09,pending,medium,True,2024-10-10,False,Italy,1429.3
+254,12,2024-09-28,approved,low,False,2024-10-05,True,Czech Republic,4986.94
+255,40,2024-09-26,approved,medium,True,2024-09-28,True,Slovakia,1206.08
+256,28,2024-10-03,approved,high,False,2024-10-10,True,France,1184.13
+257,3,2024-10-12,approved,low,False,2024-10-20,False,France,6156.71
+258,37,2024-10-14,pending,high,True,2024-10-28,False,Italy,2225.2
+259,19,2024-10-19,approved,medium,True,2024-10-30,True,France,3633.62
+260,35,2024-09-30,approved,high,False,2024-10-01,True,Poland,4672.26
+261,38,2024-10-09,pending,low,False,2024-10-10,True,Czech Republic,7778.12
+262,36,2024-10-12,approved,medium,True,2024-10-18,True,Germany,8186.58
+263,20,2024-10-12,approved,low,False,2024-10-18,True,Czech Republic,5502.5
+264,8,2024-10-02,approved,medium,True,2024-10-08,False,Austria,7979.94
+265,26,2024-09-28,approved,low,False,2024-10-01,False,Czech Republic,7673.25
+266,47,2024-10-15,approved,low,False,2024-10-27,False,Czech Republic,1818.12
+267,34,2024-09-23,approved,high,False,2024-09-28,True,Austria,2050.64
+268,28,2024-09-25,pending,low,False,2024-10-05,True,Slovakia,3913.54
+269,4,2024-10-17,approved,medium,False,2024-10-20,True,Slovakia,9718.01
+270,2,2024-10-20,rejected,medium,False,2024-10-23,False,Hungary,1152.47
+271,13,2024-10-20,approved,low,False,2024-10-25,True,France,985.1
+272,48,2024-09-25,approved,high,False,2024-10-09,True,Austria,6615.29
+273,29,2024-09-27,approved,low,False,2024-10-12,False,Slovakia,9700.49
+274,35,2024-10-11,approved,low,False,2024-10-17,False,Slovakia,7614.85
+275,35,2024-10-14,pending,high,True,2024-10-15,False,Italy,2675.32
+276,26,2024-10-04,pending,medium,True,2024-10-06,False,Czech Republic,2619.85
+277,38,2024-10-04,approved,high,True,2024-10-07,True,Hungary,3955.91
+278,2,2024-10-13,approved,low,False,2024-10-24,False,Czech Republic,5606.23
+279,27,2024-09-27,approved,high,False,2024-09-29,True,France,3329.0
+280,21,2024-10-04,approved,medium,False,2024-10-07,False,Italy,3333.64
+281,22,2024-09-27,approved,medium,True,2024-09-29,False,Hungary,2498.52
+282,12,2024-10-07,rejected,medium,False,2024-10-19,False,Austria,2083.32
+283,7,2024-10-15,approved,low,True,2024-10-18,True,France,1070.54
+284,18,2024-10-19,pending,medium,False,2024-10-24,False,Germany,3360.51
+285,21,2024-09-27,pending,low,True,2024-10-05,False,Czech Republic,4536.12
+286,35,2024-10-14,approved,low,True,2024-10-16,True,Italy,1006.77
+287,32,2024-09-25,approved,low,False,2024-10-05,True,Slovakia,7407.2
+288,44,2024-10-03,approved,high,True,2024-10-04,True,Hungary,9452.14
+289,14,2024-10-03,approved,low,True,2024-10-12,True,France,3374.42
+290,50,2024-10-18,pending,low,True,2024-10-20,False,Slovakia,4316.14
+291,48,2024-10-15,pending,medium,True,2024-10-27,True,Czech Republic,9171.85
+292,26,2024-09-26,pending,medium,True,2024-10-09,False,Hungary,6913.63
+293,46,2024-10-04,rejected,medium,False,2024-10-16,False,Hungary,4541.37
+294,21,2024-10-08,approved,medium,False,2024-10-14,True,France,4400.56
+295,11,2024-10-16,approved,low,True,2024-10-25,True,France,3613.83
+296,26,2024-10-11,pending,low,True,2024-10-21,False,Poland,5581.73
+297,23,2024-10-14,approved,medium,False,2024-10-15,False,France,6699.45
+298,12,2024-09-28,approved,high,False,2024-09-30,True,Germany,6640.55
+299,9,2024-10-15,approved,medium,False,2024-10-19,False,Germany,2121.49
+300,8,2024-10-02,approved,high,True,2024-10-11,True,France,3742.89
+301,36,2024-10-06,approved,high,False,2024-10-20,False,Poland,6770.64
+302,44,2024-09-23,approved,medium,True,2024-10-02,True,Italy,7756.17
+303,17,2024-09-28,approved,medium,False,2024-10-04,False,Germany,9955.54
+304,49,2024-09-26,approved,low,True,2024-09-30,True,Hungary,5143.58
+305,25,2024-10-01,approved,medium,False,2024-10-05,True,Slovakia,2885.64
+306,4,2024-10-10,approved,low,False,2024-10-17,True,Czech Republic,9179.66
+307,17,2024-10-07,approved,medium,True,2024-10-15,False,Slovakia,5837.7
+308,42,2024-10-09,approved,high,True,2024-10-22,False,Czech Republic,8885.97
+309,12,2024-10-05,approved,low,False,2024-10-19,True,Czech Republic,1388.91
+310,12,2024-09-26,approved,high,False,2024-10-11,True,France,4453.6
+311,49,2024-10-09,approved,high,True,2024-10-19,True,Austria,3139.42
+312,50,2024-10-13,approved,high,False,2024-10-26,True,Germany,6409.74
+313,23,2024-09-23,approved,low,False,2024-09-27,True,Hungary,9670.65
+314,16,2024-09-23,pending,medium,False,2024-10-06,False,Austria,1588.82
+315,34,2024-09-27,pending,low,True,2024-10-04,False,Czech Republic,873.87
+316,12,2024-10-03,approved,high,False,2024-10-04,False,Hungary,8628.78
+317,37,2024-10-18,approved,medium,False,2024-10-19,False,Hungary,9217.86
+318,28,2024-10-05,approved,low,True,2024-10-15,True,Austria,2164.79
+319,32,2024-10-08,approved,high,False,2024-10-13,True,Poland,9090.1
+320,9,2024-10-17,pending,low,True,2024-10-28,True,Poland,5323.8
+321,9,2024-10-19,approved,low,False,2024-10-30,False,Italy,5034.45
+322,39,2024-09-21,approved,high,True,2024-09-25,False,Hungary,9664.04
+323,2,2024-09-27,pending,low,True,2024-10-03,False,Austria,4365.78
+324,2,2024-09-28,approved,high,False,2024-10-08,False,Austria,6151.79
+325,27,2024-09-28,approved,high,False,2024-10-08,True,France,5531.2
+326,22,2024-10-18,approved,medium,False,2024-10-29,True,Czech Republic,9796.39
+327,27,2024-10-15,approved,high,True,2024-10-25,True,Italy,8823.23
+328,49,2024-10-19,approved,low,False,2024-10-31,True,Poland,3603.31
+329,9,2024-10-06,pending,high,True,2024-10-18,False,Austria,1649.68
+330,2,2024-10-16,approved,medium,True,2024-10-17,False,Czech Republic,9225.59
+331,34,2024-10-09,approved,medium,False,2024-10-22,True,Czech Republic,6085.73
+332,6,2024-09-30,pending,medium,False,2024-10-01,True,Poland,6713.61
+333,43,2024-10-10,approved,high,True,2024-10-11,True,Austria,5833.37
+334,36,2024-10-20,pending,low,True,2024-10-27,False,Hungary,1516.31
+335,26,2024-10-05,approved,medium,True,2024-10-06,True,France,1230.26
+336,44,2024-10-05,approved,high,False,2024-10-11,True,Poland,5853.29
+337,4,2024-10-02,approved,medium,True,2024-10-12,True,Italy,3047.53
+338,6,2024-10-16,approved,low,False,2024-10-23,True,Austria,5343.19
+339,37,2024-10-07,approved,high,False,2024-10-11,True,Czech Republic,1584.03
+340,11,2024-09-29,approved,low,False,2024-09-30,True,Italy,4630.68
+341,27,2024-09-22,approved,low,False,2024-09-27,True,Hungary,5502.6
+342,36,2024-09-23,approved,high,False,2024-10-06,False,Germany,6551.24
+343,18,2024-09-28,approved,low,True,2024-10-03,True,Slovakia,9349.56
+344,19,2024-10-17,approved,medium,True,2024-10-21,True,Poland,9301.1
+345,49,2024-10-03,approved,medium,False,2024-10-10,True,France,7751.08
+346,1,2024-09-25,approved,high,False,2024-09-26,True,Germany,3863.08
+347,2,2024-10-13,pending,high,True,2024-10-26,False,Slovakia,3938.24
+348,11,2024-10-07,approved,low,True,2024-10-19,True,France,7493.01
+349,18,2024-09-30,pending,high,True,2024-10-07,False,Italy,3265.36
+350,33,2024-10-12,approved,medium,True,2024-10-17,True,Hungary,2986.34
+351,38,2024-10-18,approved,high,True,2024-10-22,False,Austria,6293.26
+352,26,2024-09-22,approved,low,False,2024-10-03,True,Italy,667.98
+353,40,2024-10-03,pending,high,False,2024-10-09,False,Poland,3852.5
+354,11,2024-09-30,approved,low,False,2024-10-14,False,Germany,9272.12
+355,40,2024-10-07,approved,medium,False,2024-10-16,True,Italy,3603.19
+356,21,2024-10-19,approved,medium,False,2024-10-25,False,Austria,1131.98
+357,30,2024-09-29,pending,medium,False,2024-10-03,True,Austria,5078.43
+358,1,2024-10-02,approved,medium,True,2024-10-09,True,Slovakia,1535.38
+359,12,2024-09-30,approved,high,True,2024-10-09,True,Austria,5857.8
+360,3,2024-10-15,approved,low,True,2024-10-17,False,Hungary,2937.86
+361,11,2024-09-23,pending,high,True,2024-10-04,True,France,6483.14
+362,20,2024-10-07,approved,low,False,2024-10-16,True,Slovakia,4681.88
+363,42,2024-10-06,pending,low,True,2024-10-13,True,Hungary,2838.12
+364,49,2024-10-02,rejected,medium,False,2024-10-08,True,Austria,2520.52
+365,47,2024-10-01,approved,high,False,2024-10-07,True,Austria,5756.08
+366,39,2024-10-15,approved,low,True,2024-10-29,False,France,7794.65
+367,35,2024-09-28,approved,low,False,2024-10-06,True,Poland,1287.84
+368,14,2024-10-07,approved,high,False,2024-10-16,False,Germany,6154.24
+369,13,2024-10-19,approved,high,False,2024-10-22,False,France,2441.97
+370,25,2024-09-21,approved,high,True,2024-09-28,True,Slovakia,2128.06
+371,35,2024-09-25,approved,high,True,2024-10-04,False,Czech Republic,7828.06
+372,16,2024-10-04,approved,medium,False,2024-10-06,True,Italy,1408.94
+373,5,2024-09-27,approved,medium,False,2024-09-29,True,Slovakia,8961.02
+374,16,2024-10-02,approved,high,True,2024-10-06,True,France,9437.34
+375,50,2024-10-14,approved,medium,True,2024-10-28,True,Slovakia,6198.04
+376,46,2024-10-12,approved,medium,True,2024-10-22,True,Czech Republic,2291.9
+377,38,2024-10-20,approved,low,True,2024-10-26,True,Italy,3116.97
+378,34,2024-10-17,approved,high,False,2024-10-31,True,Austria,5856.12
+379,48,2024-10-06,approved,low,True,2024-10-14,True,Slovakia,4712.15
+380,38,2024-10-12,approved,medium,False,2024-10-18,False,Germany,9861.24
+381,8,2024-10-04,pending,high,True,2024-10-14,False,Slovakia,8467.07
+382,8,2024-09-28,approved,high,False,2024-09-29,False,Poland,6290.56
+383,6,2024-10-13,pending,high,True,2024-10-24,False,Czech Republic,3203.76
+384,29,2024-10-12,approved,low,False,2024-10-22,False,Hungary,2762.05
+385,21,2024-09-27,pending,high,True,2024-10-08,False,Germany,2129.8
+386,19,2024-10-05,approved,medium,False,2024-10-18,True,Austria,2242.3
+387,24,2024-09-21,approved,medium,False,2024-09-22,False,Germany,5679.72
+388,28,2024-10-13,pending,low,False,2024-10-22,False,Italy,3838.91
+389,48,2024-09-27,approved,medium,False,2024-10-05,False,France,6414.32
+390,2,2024-10-16,pending,medium,False,2024-10-22,False,Poland,6797.21
+391,7,2024-10-15,approved,low,True,2024-10-30,False,Hungary,6775.23
+392,8,2024-10-14,approved,medium,False,2024-10-18,False,Italy,2234.87
+393,22,2024-10-05,approved,high,True,2024-10-17,False,Poland,9683.25
+394,4,2024-10-12,approved,high,True,2024-10-25,True,Germany,2552.3
+395,18,2024-09-28,approved,high,False,2024-09-29,True,Poland,2511.14
+396,22,2024-09-27,approved,medium,False,2024-10-02,False,Czech Republic,5339.88
+397,6,2024-09-22,pending,low,False,2024-09-26,False,Czech Republic,3485.05
+398,38,2024-10-17,approved,medium,True,2024-11-01,True,Hungary,9625.6
+399,36,2024-10-14,approved,medium,True,2024-10-18,False,France,5790.66
+400,6,2024-09-27,approved,high,False,2024-09-29,False,Italy,5328.57
+401,47,2024-10-17,approved,low,False,2024-10-27,True,Hungary,8958.72
+402,26,2024-09-21,approved,medium,False,2024-10-02,False,Austria,4048.63
+403,22,2024-09-23,approved,medium,False,2024-10-06,True,Czech Republic,9049.58
+404,49,2024-10-13,approved,medium,False,2024-10-15,False,Poland,5919.44
+405,13,2024-10-08,approved,high,False,2024-10-21,True,Hungary,5647.22
+406,9,2024-10-07,approved,low,False,2024-10-12,True,Czech Republic,7153.94
+407,50,2024-10-17,pending,high,False,2024-11-01,False,Poland,4648.07
+408,35,2024-10-10,approved,medium,True,2024-10-20,True,Slovakia,1958.16
+409,31,2024-10-09,approved,high,True,2024-10-17,False,Italy,4889.25
+410,8,2024-10-20,approved,high,False,2024-10-28,True,Poland,8682.73
+411,8,2024-10-07,approved,low,True,2024-10-19,True,Italy,5655.93
+412,29,2024-10-05,approved,high,False,2024-10-12,False,France,5737.21
+413,36,2024-10-12,approved,high,True,2024-10-23,True,France,5958.59
+414,7,2024-10-11,approved,medium,True,2024-10-13,False,Poland,8392.68
+415,29,2024-09-24,approved,high,False,2024-09-28,False,Czech Republic,6418.09
+416,22,2024-10-12,approved,medium,False,2024-10-20,False,Austria,5313.58
+417,16,2024-10-04,approved,low,False,2024-10-06,True,Hungary,4182.53
+418,22,2024-10-11,rejected,medium,False,2024-10-21,False,Germany,4886.46
+419,2,2024-10-07,approved,medium,False,2024-10-11,False,Czech Republic,7436.11
+420,15,2024-09-23,approved,high,False,2024-09-29,False,Italy,9399.19
+421,19,2024-10-15,pending,medium,False,2024-10-24,False,Austria,2893.32
+422,15,2024-10-15,approved,medium,False,2024-10-27,False,Austria,8563.91
+423,47,2024-09-30,approved,medium,False,2024-10-11,True,Slovakia,4192.88
+424,21,2024-09-22,approved,low,False,2024-10-07,True,Slovakia,2421.7
+425,13,2024-09-28,pending,high,True,2024-10-09,True,Slovakia,9589.3
+426,30,2024-09-29,pending,medium,False,2024-10-10,True,Italy,2259.33
+427,17,2024-10-04,approved,medium,False,2024-10-15,False,Germany,6900.45
+428,2,2024-10-14,approved,medium,False,2024-10-18,False,Czech Republic,7577.76
+429,6,2024-09-25,pending,low,True,2024-09-28,False,Hungary,2252.97
+430,5,2024-10-05,approved,medium,False,2024-10-14,True,Italy,7931.45
+431,6,2024-10-20,approved,high,False,2024-10-26,True,Czech Republic,6091.53
+432,10,2024-10-10,pending,low,True,2024-10-11,True,Germany,1548.6
+433,28,2024-10-11,approved,low,True,2024-10-14,True,Poland,2733.42
+434,9,2024-10-02,pending,medium,False,2024-10-12,False,Poland,939.4
+435,34,2024-10-01,rejected,medium,False,2024-10-03,True,Austria,7547.68
+436,42,2024-10-06,approved,high,False,2024-10-15,True,Hungary,8392.14
+437,21,2024-09-23,approved,high,False,2024-10-01,True,France,2216.11
+438,29,2024-10-15,approved,low,False,2024-10-29,True,Germany,8401.22
+439,16,2024-10-20,approved,high,False,2024-11-03,True,Italy,2820.89
+440,1,2024-10-10,pending,medium,True,2024-10-19,False,Slovakia,997.3
+441,20,2024-09-25,approved,low,True,2024-10-04,True,Poland,8355.61
+442,8,2024-09-24,approved,low,True,2024-10-06,False,France,4431.48
+443,22,2024-09-24,pending,low,True,2024-09-29,True,Italy,3045.48
+444,43,2024-10-17,approved,medium,False,2024-10-19,True,Italy,5502.97
+445,46,2024-09-23,approved,medium,False,2024-10-08,True,Slovakia,4536.12
+446,34,2024-10-08,approved,medium,True,2024-10-15,False,Czech Republic,3718.8
+447,16,2024-09-26,approved,low,True,2024-09-27,True,Poland,8213.92
+448,42,2024-10-19,pending,high,False,2024-10-22,False,Austria,4353.6
+449,12,2024-09-21,approved,low,True,2024-09-24,True,Germany,2008.79
+450,38,2024-10-04,approved,high,True,2024-10-06,True,Czech Republic,6267.14
+451,32,2024-10-05,approved,high,True,2024-10-08,False,Poland,3759.11
+452,15,2024-10-15,approved,low,False,2024-10-25,True,Czech Republic,1491.07
+453,1,2024-10-16,pending,high,True,2024-10-27,False,Austria,9421.24
+454,18,2024-10-18,approved,medium,False,2024-10-23,False,Slovakia,8238.5
+455,23,2024-10-07,approved,high,True,2024-10-12,False,Hungary,5296.12
+456,10,2024-10-04,approved,medium,True,2024-10-05,False,Austria,6718.2
+457,33,2024-10-19,approved,high,True,2024-10-21,True,Slovakia,2435.38
+458,4,2024-09-24,approved,low,True,2024-09-28,False,Austria,7989.5
+459,44,2024-09-30,approved,low,False,2024-10-11,True,France,7490.89
+460,19,2024-09-27,approved,high,False,2024-10-12,True,France,5997.73
+461,46,2024-09-30,pending,medium,True,2024-10-15,True,Austria,5457.56
+462,48,2024-10-10,approved,low,True,2024-10-18,True,Slovakia,5971.04
+463,39,2024-10-16,pending,high,True,2024-10-24,False,Hungary,4099.54
+464,33,2024-09-21,pending,low,True,2024-10-04,False,Italy,3263.64
+465,49,2024-10-11,pending,low,True,2024-10-16,False,Poland,6503.11
+466,3,2024-10-16,pending,low,True,2024-10-31,False,France,9597.81
+467,31,2024-10-18,rejected,low,False,2024-10-30,False,Slovakia,2003.77
+468,3,2024-09-26,approved,low,True,2024-10-09,False,Italy,7601.5
+469,5,2024-09-26,pending,medium,True,2024-10-02,True,Germany,6816.44
+470,5,2024-09-28,approved,medium,False,2024-10-04,False,Poland,4125.71
+471,47,2024-10-13,pending,low,True,2024-10-16,True,Italy,4088.83
+472,28,2024-09-30,pending,medium,True,2024-10-11,False,France,2376.35
+473,39,2024-10-12,approved,medium,False,2024-10-15,True,Germany,4060.46
+474,48,2024-10-01,approved,medium,True,2024-10-11,True,Hungary,9590.75
+475,43,2024-10-02,pending,high,False,2024-10-05,True,Austria,9894.67
+476,18,2024-09-23,approved,low,False,2024-10-06,False,Germany,1093.79
+477,18,2024-09-26,approved,high,False,2024-09-30,True,Germany,3881.04
+478,7,2024-09-23,pending,high,False,2024-09-30,True,Austria,8478.56
+479,39,2024-10-04,approved,medium,True,2024-10-16,False,Poland,7711.9
+480,41,2024-10-07,approved,high,False,2024-10-20,True,Czech Republic,5840.49
+481,40,2024-10-06,approved,medium,False,2024-10-12,True,Poland,3782.34
+482,33,2024-09-24,approved,low,False,2024-09-28,True,France,793.09
+483,38,2024-10-16,pending,low,False,2024-10-20,False,Austria,3316.34
+484,11,2024-10-03,approved,high,True,2024-10-14,True,Poland,3552.92
+485,50,2024-10-02,approved,medium,False,2024-10-06,False,Italy,2455.26
+486,44,2024-10-19,pending,high,True,2024-10-28,False,Hungary,1432.23
+487,30,2024-09-23,approved,low,True,2024-10-02,True,Czech Republic,6244.87
+488,37,2024-10-06,pending,low,True,2024-10-21,True,Italy,2427.12
+489,43,2024-10-05,approved,medium,True,2024-10-08,True,Slovakia,8171.65
+490,45,2024-09-21,approved,high,True,2024-09-29,False,Italy,4306.41
+491,32,2024-09-28,approved,high,False,2024-10-08,True,France,709.11
+492,35,2024-10-15,approved,medium,False,2024-10-30,True,Germany,5215.7
+493,16,2024-10-01,approved,high,False,2024-10-09,False,France,2475.85
+494,50,2024-10-14,approved,medium,False,2024-10-19,True,Hungary,8336.67
+495,20,2024-10-13,pending,medium,True,2024-10-28,False,Czech Republic,1950.79
+496,1,2024-10-09,pending,high,False,2024-10-13,False,Germany,3311.23
+497,40,2024-10-01,approved,low,False,2024-10-12,False,Slovakia,5021.54
+498,17,2024-09-22,approved,high,True,2024-10-04,True,Poland,2930.67
+499,8,2024-10-02,approved,medium,False,2024-10-11,True,Poland,4756.27
+500,5,2024-10-08,approved,high,False,2024-10-15,True,Hungary,9487.38
+501,23,2024-10-12,approved,high,True,2024-10-22,False,Germany,9147.77
+502,24,2024-09-23,approved,low,True,2024-09-28,True,Poland,3216.39
+503,16,2024-10-10,pending,low,True,2024-10-14,False,Poland,3582.76
+504,31,2024-10-11,approved,low,True,2024-10-17,True,Czech Republic,6927.71
+505,35,2024-10-12,approved,low,False,2024-10-18,True,Italy,8037.08
+506,8,2024-10-02,approved,low,False,2024-10-12,True,Slovakia,8515.73
+507,34,2024-10-06,approved,high,True,2024-10-19,False,Slovakia,8062.54
+508,9,2024-10-18,pending,high,True,2024-10-25,False,Germany,3935.96
+509,13,2024-10-17,rejected,low,False,2024-10-28,False,Germany,1420.68
+510,14,2024-10-20,approved,low,False,2024-10-28,False,Poland,3004.05
+511,13,2024-10-03,approved,high,True,2024-10-13,False,Poland,7363.39
+512,29,2024-10-02,approved,medium,False,2024-10-11,False,Germany,2934.11
+513,19,2024-10-02,approved,medium,False,2024-10-12,True,Czech Republic,7576.17
+514,14,2024-10-20,pending,low,True,2024-10-21,False,Hungary,1904.75
+515,7,2024-09-30,approved,low,True,2024-10-13,False,Italy,6182.45
+516,28,2024-10-07,approved,low,True,2024-10-10,True,Austria,7177.94
+517,1,2024-10-20,approved,medium,False,2024-10-27,True,Slovakia,5684.54
+518,32,2024-10-17,pending,low,True,2024-10-22,False,Germany,3339.62
+519,2,2024-09-22,pending,high,False,2024-09-30,True,France,9178.49
+520,40,2024-10-14,approved,medium,True,2024-10-28,False,Italy,5296.21
+521,48,2024-10-05,pending,medium,False,2024-10-07,False,France,1676.07
+522,5,2024-09-29,approved,high,False,2024-10-13,False,Czech Republic,1986.1
+523,7,2024-10-19,rejected,low,False,2024-11-03,True,Hungary,1989.04
+524,19,2024-10-15,approved,medium,False,2024-10-30,False,Poland,6503.82
+525,41,2024-10-18,approved,high,False,2024-10-24,True,Germany,2828.61
+526,31,2024-09-23,approved,low,False,2024-09-26,False,Italy,5652.09
+527,13,2024-10-19,approved,medium,False,2024-10-30,False,Slovakia,8238.66
+528,6,2024-09-29,approved,low,True,2024-10-05,False,France,2099.96
+529,34,2024-09-24,approved,medium,True,2024-09-30,True,Italy,1519.93
+530,49,2024-10-18,approved,low,False,2024-10-28,True,Slovakia,2720.95
+531,3,2024-10-19,approved,medium,True,2024-10-24,False,Germany,3011.83
+532,4,2024-10-04,approved,medium,False,2024-10-18,True,France,7044.73
+533,44,2024-10-17,approved,medium,False,2024-10-26,True,Czech Republic,1145.87
+534,5,2024-09-26,approved,high,True,2024-09-30,True,Czech Republic,3608.13
+535,44,2024-10-18,approved,high,True,2024-11-02,False,Austria,5801.26
+536,39,2024-10-11,approved,high,True,2024-10-25,True,Slovakia,4187.2
+537,42,2024-09-28,approved,low,False,2024-10-09,False,Hungary,6260.44
+538,7,2024-10-18,approved,medium,False,2024-10-21,True,Germany,8663.54
+539,47,2024-10-01,approved,medium,False,2024-10-13,False,Italy,1302.1
+540,41,2024-09-26,approved,low,False,2024-10-07,True,Italy,3012.93
+541,5,2024-10-13,pending,high,True,2024-10-24,False,Italy,4354.7
+542,21,2024-09-30,approved,medium,False,2024-10-12,True,France,7079.11
+543,40,2024-10-19,approved,low,True,2024-10-21,True,Austria,3769.35
+544,4,2024-09-23,approved,low,True,2024-10-02,True,Hungary,9346.56
+545,18,2024-10-18,approved,high,True,2024-10-30,True,France,8658.46
+546,34,2024-10-11,approved,medium,False,2024-10-16,False,Germany,5253.62
+547,3,2024-10-18,approved,medium,False,2024-10-26,False,Italy,6507.88
+548,9,2024-10-09,approved,low,False,2024-10-11,True,Hungary,3230.14
+549,30,2024-09-30,approved,medium,False,2024-10-07,False,Slovakia,5642.91
+550,15,2024-10-09,approved,medium,True,2024-10-12,True,Czech Republic,4041.62
+551,23,2024-09-23,approved,low,True,2024-10-07,True,France,8078.89
+552,20,2024-09-27,approved,medium,False,2024-10-06,True,Austria,515.79
+553,2,2024-10-04,approved,low,True,2024-10-16,False,Czech Republic,9062.05
+554,6,2024-10-19,approved,low,False,2024-10-28,False,France,8595.59
+555,25,2024-10-06,pending,low,True,2024-10-15,False,Poland,4028.4
+556,22,2024-10-01,approved,low,False,2024-10-08,True,Hungary,7696.8
+557,34,2024-10-11,approved,medium,True,2024-10-22,False,France,6677.05
+558,38,2024-10-18,approved,low,True,2024-10-27,True,Italy,2234.35
+559,18,2024-09-22,approved,medium,False,2024-09-24,True,Germany,2968.11
+560,21,2024-10-14,approved,medium,True,2024-10-24,True,Hungary,7208.26
+561,19,2024-09-22,pending,low,True,2024-09-29,True,France,723.3
+562,37,2024-10-17,approved,medium,False,2024-10-30,True,Poland,7637.39
+563,29,2024-09-27,approved,high,False,2024-10-06,True,Poland,1876.98
+564,13,2024-10-09,approved,high,True,2024-10-13,True,Poland,573.22
+565,24,2024-09-28,approved,medium,True,2024-10-13,True,Austria,2792.25
+566,21,2024-10-12,approved,high,False,2024-10-16,False,Italy,9267.4
+567,31,2024-10-14,approved,high,False,2024-10-27,True,Austria,9554.39
+568,43,2024-10-10,approved,medium,False,2024-10-13,False,Hungary,4690.41
+569,50,2024-09-28,approved,low,False,2024-10-11,True,Slovakia,6379.62
+570,39,2024-09-28,approved,high,False,2024-10-07,True,Germany,3985.25
+571,40,2024-10-06,approved,low,False,2024-10-19,False,Italy,3231.36
+572,43,2024-10-18,approved,low,False,2024-10-27,True,France,5641.24
+573,37,2024-09-23,pending,high,True,2024-09-25,False,Czech Republic,1336.87
+574,48,2024-10-17,pending,low,False,2024-10-23,False,France,2787.8
+575,18,2024-09-22,approved,medium,False,2024-09-30,True,Austria,5646.79
+576,38,2024-10-18,approved,medium,True,2024-10-24,True,Poland,7101.13
+577,9,2024-10-12,pending,high,False,2024-10-26,True,Poland,9575.26
+578,21,2024-10-20,approved,medium,False,2024-11-02,True,Czech Republic,3351.3
+579,31,2024-09-21,rejected,medium,False,2024-09-26,False,Czech Republic,3625.25
+580,21,2024-09-22,approved,high,True,2024-09-30,False,Czech Republic,6257.99
+581,38,2024-10-20,approved,low,True,2024-10-26,True,Hungary,4120.84
+582,46,2024-09-27,approved,medium,False,2024-09-28,True,Czech Republic,656.92
+583,6,2024-09-30,approved,high,False,2024-10-14,True,Italy,6856.5
+584,12,2024-09-28,approved,high,False,2024-10-11,False,Hungary,7067.84
+585,11,2024-10-02,approved,medium,False,2024-10-10,False,Austria,2076.73
+586,20,2024-10-03,approved,medium,True,2024-10-10,False,Czech Republic,5403.56
+587,26,2024-10-17,approved,low,False,2024-10-18,True,Germany,6497.4
+588,47,2024-10-07,approved,high,True,2024-10-10,True,Hungary,9003.39
+589,26,2024-10-13,approved,medium,True,2024-10-19,True,Czech Republic,9174.32
+590,41,2024-10-13,approved,high,True,2024-10-19,False,Poland,8370.06
+591,16,2024-10-17,approved,high,False,2024-10-25,True,France,5114.63
+592,21,2024-10-10,approved,high,True,2024-10-20,True,Czech Republic,9937.51
+593,10,2024-10-12,approved,low,True,2024-10-19,True,Poland,7836.03
+594,50,2024-09-30,approved,low,True,2024-10-15,False,France,8328.07
+595,29,2024-10-17,approved,low,False,2024-10-24,True,Hungary,8604.08
+596,13,2024-10-08,approved,medium,False,2024-10-10,True,Austria,1922.37
+597,49,2024-10-17,pending,high,True,2024-10-27,True,Poland,3627.33
+598,25,2024-10-13,approved,medium,False,2024-10-25,False,Slovakia,4347.65
+599,33,2024-10-04,pending,low,True,2024-10-07,False,Hungary,1221.01
+600,4,2024-10-01,pending,medium,True,2024-10-15,True,France,7160.97
+601,39,2024-10-09,approved,medium,False,2024-10-19,False,Germany,5232.32
+602,33,2024-09-25,approved,high,False,2024-10-03,True,Austria,7591.51
+603,45,2024-10-11,approved,medium,True,2024-10-17,True,Austria,5615.19
+604,26,2024-10-05,pending,high,False,2024-10-19,False,Czech Republic,2864.41
+605,38,2024-09-28,approved,low,False,2024-10-04,True,Italy,4758.32
+606,50,2024-09-28,approved,low,True,2024-10-08,True,Poland,7983.37
+607,24,2024-09-27,pending,medium,False,2024-10-04,True,Germany,730.16
+608,23,2024-10-20,approved,low,False,2024-10-29,True,Hungary,8603.55
+609,42,2024-10-15,rejected,low,False,2024-10-17,False,Hungary,1675.92
+610,39,2024-10-08,pending,medium,True,2024-10-09,True,Italy,8301.74
+611,48,2024-09-30,approved,low,False,2024-10-15,True,Hungary,2140.96
+612,41,2024-09-21,pending,low,True,2024-10-03,False,Poland,8863.06
+613,36,2024-10-12,approved,medium,True,2024-10-20,True,Poland,2717.95
+614,2,2024-10-06,approved,low,False,2024-10-08,False,Germany,7121.38
+615,7,2024-10-08,pending,low,False,2024-10-13,False,Italy,1751.87
+616,29,2024-10-14,approved,medium,False,2024-10-16,True,France,1421.42
+617,11,2024-10-07,approved,high,True,2024-10-08,True,Germany,3422.85
+618,48,2024-10-13,rejected,medium,False,2024-10-25,False,Slovakia,1556.8
+619,42,2024-09-23,approved,high,True,2024-09-27,True,Hungary,9956.74
+620,11,2024-10-15,approved,medium,False,2024-10-18,False,Austria,2508.46
+621,2,2024-10-06,pending,high,True,2024-10-21,False,Czech Republic,8962.87
+622,18,2024-10-20,approved,high,False,2024-11-01,True,Italy,4020.07
+623,31,2024-10-01,approved,medium,True,2024-10-11,False,Germany,7421.59
+624,19,2024-10-13,approved,low,False,2024-10-19,True,France,3586.19
+625,30,2024-10-09,approved,medium,True,2024-10-19,False,Poland,5098.39
+626,41,2024-10-13,pending,low,True,2024-10-26,False,France,3180.03
+627,31,2024-09-24,approved,low,True,2024-09-30,False,Hungary,7403.04
+628,42,2024-09-27,approved,medium,False,2024-10-11,True,Czech Republic,9852.33
+629,42,2024-10-18,approved,low,False,2024-10-25,False,Hungary,8083.85
+630,2,2024-09-21,approved,low,True,2024-09-27,False,Italy,8721.39
+631,25,2024-10-13,pending,medium,True,2024-10-17,False,Hungary,1766.0
+632,9,2024-10-10,approved,high,False,2024-10-11,False,Austria,6165.3
+633,2,2024-10-04,approved,medium,True,2024-10-14,True,Hungary,587.21
+634,45,2024-10-19,approved,high,False,2024-10-26,False,France,6353.57
+635,21,2024-09-26,pending,low,False,2024-10-05,False,Czech Republic,3177.55
+636,23,2024-10-12,approved,high,True,2024-10-20,True,Poland,1163.99
+637,50,2024-09-24,approved,low,False,2024-09-25,False,Italy,9362.93
+638,42,2024-10-08,approved,low,False,2024-10-10,True,Hungary,5886.04
+639,24,2024-10-12,approved,medium,True,2024-10-14,False,Czech Republic,5634.59
+640,7,2024-10-09,approved,medium,False,2024-10-13,True,Poland,3922.8
+641,23,2024-10-10,approved,high,True,2024-10-18,False,Slovakia,8670.03
+642,37,2024-09-25,approved,low,True,2024-09-28,True,France,7740.25
+643,33,2024-10-06,approved,low,True,2024-10-18,True,Czech Republic,8097.15
+644,15,2024-10-08,approved,low,True,2024-10-21,False,Slovakia,7430.29
+645,19,2024-10-11,approved,low,True,2024-10-16,False,Austria,6859.69
+646,43,2024-10-07,pending,medium,True,2024-10-09,True,Austria,9232.75
+647,21,2024-09-21,approved,low,True,2024-09-23,False,France,8434.26
+648,25,2024-10-12,approved,low,True,2024-10-16,False,Slovakia,2591.57
+649,29,2024-10-03,approved,medium,True,2024-10-13,True,Czech Republic,4379.76
+650,3,2024-10-11,approved,high,False,2024-10-23,True,France,5018.44
+651,23,2024-09-24,approved,low,False,2024-09-29,True,Italy,8546.09
+652,42,2024-10-19,pending,low,True,2024-10-28,False,France,2891.65
+653,27,2024-10-02,approved,medium,True,2024-10-14,True,Poland,7759.08
+654,35,2024-09-30,approved,low,True,2024-10-11,True,France,4188.94
+655,30,2024-09-25,pending,high,False,2024-10-02,True,Slovakia,7078.2
+656,36,2024-09-22,approved,low,False,2024-10-05,False,Slovakia,7017.47
+657,43,2024-10-03,pending,medium,True,2024-10-15,False,Germany,573.56
+658,36,2024-10-13,rejected,low,False,2024-10-16,False,Czech Republic,1006.42
+659,29,2024-09-28,approved,low,True,2024-10-10,True,Czech Republic,1249.34
+660,10,2024-09-29,approved,high,True,2024-10-10,False,Hungary,2330.12
+661,17,2024-09-22,approved,medium,False,2024-10-03,True,Germany,3941.58
+662,12,2024-09-29,pending,low,True,2024-10-08,False,France,2943.29
+663,16,2024-10-13,approved,low,False,2024-10-22,True,Germany,7983.57
+664,11,2024-09-30,approved,low,False,2024-10-07,False,Germany,4126.89
+665,28,2024-10-10,approved,medium,False,2024-10-20,False,Italy,4222.16
+666,7,2024-10-13,approved,medium,False,2024-10-15,False,Hungary,8132.86
+667,22,2024-10-01,approved,medium,True,2024-10-14,True,Slovakia,4270.02
+668,40,2024-10-18,approved,high,False,2024-10-30,False,France,9433.54
+669,16,2024-10-16,approved,medium,True,2024-10-23,True,Slovakia,2827.05
+670,4,2024-09-26,approved,high,False,2024-10-11,False,Czech Republic,5351.91
+671,16,2024-09-29,approved,high,True,2024-10-06,True,France,6279.87
+672,38,2024-09-23,approved,low,False,2024-10-02,True,Italy,2110.15
+673,1,2024-10-04,approved,medium,True,2024-10-10,True,Germany,7399.76
+674,31,2024-10-12,pending,high,True,2024-10-27,True,Austria,9521.29
+675,14,2024-10-01,pending,low,True,2024-10-16,False,Austria,7618.76
+676,27,2024-10-14,pending,low,False,2024-10-26,False,Germany,2596.62
+677,7,2024-09-26,approved,medium,True,2024-09-30,True,Italy,8414.77
+678,33,2024-10-16,approved,high,False,2024-10-29,False,Austria,7434.86
+679,32,2024-10-12,pending,high,False,2024-10-16,False,France,2344.29
+680,30,2024-10-14,approved,low,False,2024-10-25,False,Hungary,6605.48
+681,1,2024-09-22,rejected,medium,False,2024-09-23,True,Czech Republic,5866.87
+682,39,2024-09-30,approved,medium,False,2024-10-03,True,Slovakia,8468.24
+683,16,2024-10-16,pending,low,True,2024-10-17,False,Poland,3898.16
+684,47,2024-10-18,approved,high,True,2024-10-29,True,Austria,8661.11
+685,14,2024-10-01,pending,low,True,2024-10-06,True,Slovakia,2268.4
+686,17,2024-10-02,approved,high,False,2024-10-15,False,Italy,6082.28
+687,34,2024-09-25,pending,medium,True,2024-10-07,False,Italy,2424.15
+688,45,2024-09-25,approved,high,False,2024-10-02,True,Germany,7278.04
+689,32,2024-10-20,pending,low,True,2024-11-03,False,Germany,3518.26
+690,20,2024-10-04,pending,medium,True,2024-10-08,False,Italy,1729.1
+691,3,2024-10-01,approved,medium,False,2024-10-16,True,France,5740.18
+692,8,2024-09-27,pending,medium,True,2024-10-02,False,France,5242.57
+693,26,2024-10-06,pending,high,False,2024-10-15,False,Germany,1555.68
+694,45,2024-10-05,approved,low,False,2024-10-13,True,Germany,2193.15
+695,3,2024-10-18,approved,high,False,2024-10-31,False,Hungary,8193.65
+696,16,2024-10-10,pending,medium,True,2024-10-14,False,Czech Republic,8658.56
+697,18,2024-10-13,approved,low,True,2024-10-22,True,Slovakia,9114.46
+698,35,2024-10-03,pending,high,False,2024-10-05,False,Italy,542.95
+699,16,2024-09-21,approved,medium,True,2024-09-26,False,France,2930.65
+700,18,2024-10-13,approved,low,True,2024-10-18,False,France,6487.79
+701,14,2024-10-04,approved,medium,False,2024-10-07,True,France,3357.64
+702,44,2024-10-10,approved,medium,True,2024-10-18,False,Czech Republic,8789.91
+703,17,2024-10-15,pending,high,False,2024-10-18,False,Italy,3393.29
+704,1,2024-10-09,approved,high,True,2024-10-15,True,Hungary,2037.59
+705,45,2024-10-01,approved,low,False,2024-10-04,False,Italy,4747.34
+706,50,2024-10-11,approved,low,False,2024-10-14,False,Italy,670.33
+707,19,2024-10-17,approved,high,False,2024-10-18,True,Czech Republic,5682.4
+708,45,2024-10-08,rejected,low,False,2024-10-09,False,Czech Republic,8657.89
+709,27,2024-10-02,approved,low,False,2024-10-12,True,Slovakia,4023.05
+710,3,2024-09-27,rejected,medium,False,2024-10-05,False,Italy,6115.54
+711,35,2024-10-10,approved,low,True,2024-10-15,True,Slovakia,3119.8
+712,41,2024-09-29,approved,high,False,2024-10-09,True,France,2163.47
+713,18,2024-09-21,approved,high,True,2024-10-04,True,Hungary,6901.92
+714,22,2024-09-22,approved,low,True,2024-09-26,False,France,2608.59
+715,29,2024-10-11,approved,high,False,2024-10-20,False,Hungary,5903.51
+716,40,2024-10-07,pending,high,True,2024-10-18,False,France,2122.58
+717,21,2024-09-27,approved,medium,True,2024-10-05,False,Italy,5742.45
+718,14,2024-10-18,pending,high,False,2024-10-25,True,France,9996.69
+719,38,2024-10-17,approved,medium,False,2024-11-01,False,Hungary,3102.43
+720,7,2024-09-25,approved,high,False,2024-09-29,False,France,3939.29
+721,20,2024-10-20,pending,medium,False,2024-10-25,True,Czech Republic,4730.71
+722,38,2024-09-26,rejected,low,False,2024-10-10,True,France,7900.29
+723,13,2024-10-13,pending,high,True,2024-10-19,False,Czech Republic,1434.33
+724,11,2024-10-08,pending,high,False,2024-10-23,False,France,6208.56
+725,30,2024-09-23,approved,low,False,2024-09-26,True,Italy,4589.1
+726,14,2024-10-03,pending,high,False,2024-10-17,True,Hungary,1007.29
+727,12,2024-09-22,approved,medium,True,2024-09-28,True,Slovakia,7092.94
+728,22,2024-09-21,approved,low,True,2024-09-27,True,France,6099.58
+729,29,2024-10-19,approved,medium,False,2024-10-21,True,Poland,5624.35
+730,21,2024-10-08,approved,high,True,2024-10-12,True,Czech Republic,6278.23
+731,41,2024-09-28,rejected,medium,False,2024-10-12,False,Austria,3672.76
+732,4,2024-10-18,pending,high,True,2024-10-27,False,Slovakia,2127.68
+733,24,2024-10-06,pending,high,False,2024-10-17,False,France,5413.83
+734,49,2024-10-10,approved,medium,True,2024-10-17,False,Germany,2494.33
+735,37,2024-09-28,approved,high,False,2024-09-30,True,France,5477.95
+736,37,2024-10-15,approved,low,True,2024-10-20,True,France,3028.8
+737,27,2024-10-03,rejected,medium,False,2024-10-11,False,Czech Republic,538.42
+738,33,2024-10-18,approved,high,True,2024-10-27,True,Czech Republic,4959.91
+739,6,2024-10-04,approved,high,True,2024-10-12,True,Slovakia,4367.98
+740,9,2024-09-24,approved,high,True,2024-10-02,True,Germany,6975.2
+741,15,2024-09-22,approved,high,False,2024-09-27,True,Hungary,5894.07
+742,40,2024-10-11,approved,high,False,2024-10-25,True,Hungary,5708.82
+743,43,2024-10-08,approved,medium,False,2024-10-22,True,Hungary,2119.97
+744,43,2024-09-23,approved,low,True,2024-10-03,True,Slovakia,9321.03
+745,33,2024-10-09,approved,high,False,2024-10-11,False,Germany,6876.27
+746,22,2024-09-26,approved,medium,True,2024-10-08,False,France,6814.23
+747,7,2024-10-19,approved,medium,False,2024-10-23,False,Hungary,3662.5
+748,37,2024-09-24,approved,medium,True,2024-10-03,True,Poland,7412.0
+749,39,2024-10-18,approved,medium,True,2024-10-29,True,Austria,8232.49
+750,50,2024-09-24,approved,low,False,2024-09-25,True,Italy,5418.26
+751,34,2024-10-02,approved,high,True,2024-10-07,True,Germany,5764.32
+752,42,2024-10-11,approved,high,False,2024-10-17,True,Germany,9702.79
+753,37,2024-10-13,approved,high,False,2024-10-23,True,Slovakia,1322.57
+754,23,2024-09-21,approved,medium,True,2024-09-23,True,France,4030.7
+755,37,2024-10-01,pending,high,False,2024-10-08,False,Slovakia,5748.9
+756,24,2024-09-28,approved,high,True,2024-10-04,True,Poland,6355.78
+757,12,2024-10-10,approved,high,True,2024-10-17,False,Hungary,3085.94
+758,11,2024-09-25,pending,medium,True,2024-09-28,False,Poland,4441.3
+759,44,2024-10-17,approved,low,False,2024-10-28,True,Italy,9031.17
+760,48,2024-10-16,approved,high,True,2024-10-21,True,Slovakia,3115.71
+761,13,2024-09-29,approved,medium,True,2024-10-05,True,Poland,3829.12
+762,1,2024-10-12,approved,medium,False,2024-10-19,True,Austria,2836.1
+763,20,2024-09-22,approved,low,False,2024-09-26,False,Poland,5087.8
+764,22,2024-09-25,pending,high,True,2024-09-26,False,France,4978.97
+765,43,2024-10-02,approved,medium,True,2024-10-04,False,Germany,1476.97
+766,19,2024-09-29,pending,high,False,2024-10-02,False,Czech Republic,5298.46
+767,42,2024-09-23,approved,medium,False,2024-09-26,True,Czech Republic,9317.44
+768,35,2024-09-26,approved,low,True,2024-10-06,True,France,7354.93
+769,44,2024-10-19,approved,medium,True,2024-10-29,True,Italy,9497.41
+770,16,2024-10-01,approved,high,True,2024-10-13,True,Czech Republic,5368.71
+771,31,2024-10-03,approved,low,False,2024-10-10,False,Poland,7238.35
+772,35,2024-10-15,approved,low,False,2024-10-20,True,Slovakia,6811.8
+773,32,2024-09-26,approved,medium,False,2024-09-29,False,Slovakia,7973.76
+774,6,2024-10-16,approved,low,True,2024-10-24,False,Slovakia,6688.68
+775,17,2024-10-14,approved,medium,False,2024-10-23,True,Czech Republic,1451.43
+776,49,2024-10-09,pending,medium,True,2024-10-16,False,Czech Republic,4904.8
+777,27,2024-10-06,approved,high,True,2024-10-17,True,Austria,4280.01
+778,21,2024-10-14,pending,low,True,2024-10-23,False,Germany,2960.72
+779,7,2024-10-14,pending,high,True,2024-10-29,True,Hungary,2821.23
+780,47,2024-10-07,approved,medium,True,2024-10-21,False,Hungary,5015.98
+781,4,2024-10-09,approved,medium,False,2024-10-23,True,Hungary,7583.42
+782,19,2024-10-11,approved,high,False,2024-10-24,True,Austria,5877.98
+783,18,2024-09-28,approved,low,True,2024-10-07,False,Czech Republic,7691.76
+784,46,2024-10-20,approved,medium,True,2024-10-26,False,Italy,9723.52
+785,4,2024-10-04,approved,low,False,2024-10-14,False,Germany,9042.68
+786,8,2024-10-13,approved,high,False,2024-10-23,True,Czech Republic,5423.92
+787,20,2024-09-29,approved,high,True,2024-10-02,True,Slovakia,6163.19
+788,20,2024-10-08,approved,high,True,2024-10-16,True,France,5895.91
+789,50,2024-10-14,pending,high,True,2024-10-25,True,Hungary,2854.76
+790,41,2024-10-17,approved,low,True,2024-10-22,True,Slovakia,2575.53
+791,37,2024-10-11,approved,low,False,2024-10-15,True,Germany,1105.43
+792,43,2024-10-15,approved,low,True,2024-10-26,True,Italy,1234.89
+793,9,2024-09-28,pending,low,True,2024-10-11,True,France,1582.64
+794,37,2024-09-21,approved,high,True,2024-09-28,False,Poland,9610.83
+795,15,2024-09-24,approved,low,True,2024-10-08,True,Austria,1209.15
+796,27,2024-10-08,approved,high,True,2024-10-16,False,Hungary,5335.23
+797,27,2024-09-24,approved,high,False,2024-10-03,True,Slovakia,5129.96
+798,19,2024-10-02,approved,medium,True,2024-10-04,True,Germany,9413.69
+799,9,2024-10-19,approved,high,True,2024-10-26,True,Poland,7368.14
+800,7,2024-10-07,approved,medium,True,2024-10-08,True,Austria,4466.1
+801,40,2024-10-07,approved,medium,False,2024-10-16,False,Germany,5591.16
+802,41,2024-09-27,approved,medium,True,2024-10-10,True,Italy,4245.92
+803,36,2024-10-14,pending,high,False,2024-10-20,False,Germany,1689.85
+804,29,2024-10-19,pending,high,False,2024-10-27,False,Czech Republic,1438.88
+805,8,2024-10-19,approved,high,False,2024-11-01,False,Germany,7837.72
+806,2,2024-10-07,approved,low,True,2024-10-21,True,Hungary,8669.79
+807,33,2024-09-22,approved,low,True,2024-09-29,False,France,6428.71
+808,35,2024-09-24,pending,low,True,2024-09-30,False,France,4679.16
+809,14,2024-10-11,pending,high,True,2024-10-22,True,Hungary,3209.24
+810,47,2024-09-26,approved,high,False,2024-10-01,True,Poland,8042.1
+811,15,2024-10-14,pending,high,False,2024-10-24,True,Germany,2042.16
+812,43,2024-10-15,approved,high,False,2024-10-19,False,Slovakia,4267.38
+813,43,2024-09-22,approved,high,False,2024-10-02,False,Austria,5874.27
+814,44,2024-09-30,approved,high,True,2024-10-11,True,Slovakia,4169.66
+815,12,2024-10-06,approved,medium,False,2024-10-15,True,Italy,8559.57
+816,4,2024-09-27,approved,medium,True,2024-10-04,True,Poland,8293.99
+817,38,2024-10-04,approved,low,False,2024-10-12,True,Italy,7996.17
+818,20,2024-10-10,rejected,medium,False,2024-10-13,False,Poland,1309.96
+819,43,2024-09-30,pending,low,False,2024-10-11,True,Slovakia,7590.8
+820,21,2024-09-28,approved,low,False,2024-10-13,True,Italy,4793.57
+821,29,2024-10-10,pending,high,False,2024-10-16,False,Hungary,2721.76
+822,33,2024-10-01,pending,high,False,2024-10-14,False,Italy,538.06
+823,38,2024-09-21,approved,low,False,2024-09-28,False,Czech Republic,9810.89
+824,24,2024-09-26,pending,medium,True,2024-09-28,False,Germany,8164.64
+825,16,2024-10-02,approved,medium,True,2024-10-09,True,Germany,9895.99
+826,22,2024-10-07,approved,medium,True,2024-10-17,False,Austria,2218.36
+827,31,2024-10-04,pending,high,True,2024-10-16,False,Italy,5002.05
+828,43,2024-09-23,approved,high,False,2024-10-02,True,Slovakia,1162.63
+829,32,2024-10-06,approved,low,True,2024-10-19,True,Austria,2583.35
+830,11,2024-10-14,approved,medium,False,2024-10-18,True,Poland,1595.62
+831,22,2024-10-15,approved,medium,False,2024-10-19,False,Italy,6350.94
+832,9,2024-10-04,pending,low,True,2024-10-15,False,Czech Republic,2108.2
+833,36,2024-10-14,approved,medium,False,2024-10-25,True,Hungary,5181.9
+834,20,2024-10-09,approved,low,True,2024-10-11,False,Austria,7161.76
+835,7,2024-10-12,pending,medium,True,2024-10-27,True,France,8749.81
+836,8,2024-10-11,approved,medium,True,2024-10-18,True,France,3321.22
+837,39,2024-10-13,approved,high,False,2024-10-16,False,Hungary,6337.97
+838,16,2024-09-26,rejected,low,False,2024-10-03,True,Hungary,8044.4
+839,12,2024-10-15,approved,high,False,2024-10-25,True,Poland,9728.9
+840,41,2024-10-15,approved,low,True,2024-10-28,True,Slovakia,587.62
+841,10,2024-09-28,approved,medium,False,2024-10-03,False,Poland,7002.26
+842,44,2024-09-22,rejected,low,False,2024-10-03,False,France,974.81
+843,22,2024-09-28,approved,low,False,2024-10-08,True,Italy,7034.58
+844,8,2024-09-27,pending,low,False,2024-10-04,False,Czech Republic,2879.46
+845,27,2024-10-14,pending,medium,True,2024-10-19,False,Slovakia,5290.13
+846,48,2024-10-06,pending,medium,True,2024-10-20,False,Germany,8392.48
+847,41,2024-10-13,approved,high,True,2024-10-26,False,Germany,7035.51
+848,15,2024-09-29,approved,medium,False,2024-10-13,False,Germany,6043.54
+849,1,2024-10-06,approved,low,False,2024-10-16,False,France,1925.3
+850,2,2024-09-26,approved,medium,False,2024-10-07,True,France,8943.07
+851,4,2024-10-01,approved,high,True,2024-10-16,True,Poland,4487.92
+852,26,2024-10-05,approved,low,True,2024-10-08,False,Hungary,2130.06
+853,22,2024-10-04,approved,low,False,2024-10-14,False,Italy,1430.11
+854,38,2024-10-02,pending,high,True,2024-10-05,False,Hungary,4943.5
+855,4,2024-10-02,approved,medium,False,2024-10-11,False,France,3008.83
+856,2,2024-10-04,approved,high,False,2024-10-06,True,Slovakia,7622.03
+857,15,2024-10-15,approved,medium,False,2024-10-17,False,France,5552.25
+858,3,2024-10-05,approved,low,False,2024-10-13,True,Slovakia,2078.99
+859,46,2024-09-24,approved,low,False,2024-09-27,True,Poland,3953.72
+860,27,2024-10-11,approved,low,True,2024-10-21,False,Austria,9786.95
+861,23,2024-10-10,approved,low,False,2024-10-19,False,Hungary,5464.7
+862,47,2024-10-05,approved,medium,True,2024-10-20,False,Hungary,7382.74
+863,18,2024-10-17,rejected,low,False,2024-10-27,False,Italy,873.25
+864,42,2024-09-24,pending,medium,False,2024-09-28,True,France,3502.16
+865,47,2024-10-16,pending,low,True,2024-10-21,True,France,8973.61
+866,49,2024-10-20,approved,medium,False,2024-10-21,True,France,2840.09
+867,36,2024-09-22,approved,low,True,2024-09-26,False,Germany,6786.03
+868,3,2024-09-29,approved,medium,True,2024-10-03,True,France,3102.98
+869,45,2024-10-01,approved,low,True,2024-10-13,True,Italy,3633.64
+870,1,2024-10-18,approved,low,False,2024-10-28,False,France,7627.36
+871,3,2024-10-03,approved,medium,True,2024-10-05,False,Slovakia,8090.31
+872,3,2024-10-15,pending,medium,False,2024-10-26,False,France,9390.08
+873,13,2024-10-18,approved,high,True,2024-10-28,True,Italy,6890.97
+874,29,2024-09-26,approved,medium,False,2024-10-09,False,Czech Republic,9705.73
+875,11,2024-10-10,approved,high,False,2024-10-24,False,Austria,7297.67
+876,26,2024-10-14,approved,high,False,2024-10-19,True,Hungary,3968.47
+877,16,2024-09-22,pending,medium,False,2024-09-27,True,Hungary,8492.52
+878,27,2024-10-08,pending,medium,True,2024-10-21,False,Italy,969.13
+879,11,2024-10-12,rejected,medium,False,2024-10-18,True,Poland,4031.08
+880,14,2024-10-04,approved,low,True,2024-10-08,False,France,6404.7
+881,9,2024-10-05,approved,low,False,2024-10-08,True,France,2566.92
+882,38,2024-10-05,approved,medium,True,2024-10-20,False,Poland,6688.11
+883,9,2024-09-26,pending,low,True,2024-10-09,False,Czech Republic,4555.82
+884,32,2024-10-17,rejected,medium,False,2024-10-19,False,Italy,3652.26
+885,23,2024-10-02,approved,high,False,2024-10-11,True,Germany,5604.52
+886,18,2024-09-27,pending,medium,True,2024-10-11,False,Czech Republic,3154.11
+887,18,2024-10-13,approved,high,True,2024-10-21,True,Poland,5146.36
+888,2,2024-10-07,approved,medium,False,2024-10-22,False,Poland,7612.53
+889,18,2024-09-25,approved,low,False,2024-09-27,False,Italy,6791.36
+890,11,2024-10-09,approved,high,False,2024-10-12,False,Hungary,897.16
+891,28,2024-10-18,pending,high,False,2024-10-22,True,Hungary,3515.93
+892,40,2024-10-12,rejected,medium,False,2024-10-21,False,France,2767.13
+893,49,2024-10-20,pending,medium,True,2024-11-04,False,Austria,3064.4
+894,44,2024-10-04,approved,low,True,2024-10-12,True,Austria,3451.41
+895,28,2024-09-24,approved,low,False,2024-09-26,False,Germany,1363.3
+896,17,2024-09-27,pending,low,False,2024-10-11,False,Czech Republic,4859.17
+897,27,2024-10-13,approved,high,True,2024-10-17,True,Hungary,2025.2
+898,37,2024-09-29,rejected,low,False,2024-10-05,False,Austria,687.21
+899,16,2024-09-24,approved,medium,False,2024-10-08,True,Italy,6718.94
+900,28,2024-09-27,rejected,low,False,2024-10-12,False,Hungary,3913.12
+901,10,2024-09-29,approved,high,True,2024-10-01,True,Czech Republic,8915.29
+902,11,2024-10-19,rejected,medium,False,2024-11-03,False,Poland,3787.08
+903,19,2024-10-11,pending,high,True,2024-10-12,True,Czech Republic,6042.14
+904,43,2024-09-23,approved,medium,True,2024-09-24,True,Slovakia,9378.79
+905,7,2024-09-28,approved,medium,True,2024-10-08,True,Hungary,9277.83
+906,42,2024-09-29,approved,medium,False,2024-10-06,False,Hungary,3385.49
+907,17,2024-10-04,approved,high,False,2024-10-11,True,Poland,2160.99
+908,44,2024-09-25,approved,high,False,2024-10-06,True,Slovakia,2959.14
+909,47,2024-09-27,approved,medium,True,2024-10-12,False,Hungary,9403.04
+910,35,2024-10-07,approved,low,True,2024-10-21,True,France,9669.05
+911,15,2024-09-29,approved,low,True,2024-10-10,True,Czech Republic,2647.63
+912,10,2024-10-20,pending,low,True,2024-10-30,False,France,1580.63
+913,20,2024-09-24,approved,medium,True,2024-10-03,True,Czech Republic,8438.28
+914,35,2024-10-06,pending,low,True,2024-10-17,False,Germany,944.32
+915,1,2024-09-24,approved,medium,True,2024-09-27,False,France,9821.43
+916,26,2024-10-14,approved,high,False,2024-10-26,False,Poland,3614.0
+917,19,2024-09-24,approved,low,True,2024-10-01,True,Czech Republic,4069.52
+918,42,2024-10-12,approved,high,False,2024-10-21,True,Hungary,3283.99
+919,16,2024-09-29,approved,low,True,2024-10-10,True,Hungary,9032.53
+920,5,2024-10-19,approved,low,True,2024-10-26,True,Austria,5679.88
+921,12,2024-10-01,pending,medium,False,2024-10-08,False,Czech Republic,2337.22
+922,9,2024-10-09,approved,medium,False,2024-10-18,True,Italy,4378.2
+923,11,2024-10-13,approved,medium,False,2024-10-16,True,Hungary,4960.25
+924,50,2024-10-18,approved,low,True,2024-10-27,True,France,7947.92
+925,22,2024-09-23,approved,low,True,2024-10-04,True,Italy,1349.18
+926,47,2024-09-21,approved,medium,True,2024-09-23,True,Germany,4367.81
+927,30,2024-10-19,rejected,low,False,2024-10-29,False,Poland,4819.78
+928,7,2024-09-25,pending,high,True,2024-09-27,False,Austria,6186.71
+929,21,2024-09-21,approved,low,True,2024-09-30,True,Austria,7984.19
+930,2,2024-10-02,approved,high,True,2024-10-13,False,Hungary,5522.66
+931,38,2024-09-30,approved,low,True,2024-10-03,False,Slovakia,7601.18
+932,41,2024-10-03,approved,high,False,2024-10-13,False,France,8223.87
+933,29,2024-10-14,approved,low,False,2024-10-22,True,France,2473.16
+934,39,2024-10-11,approved,low,True,2024-10-17,True,Hungary,609.11
+935,35,2024-10-01,pending,high,False,2024-10-02,False,Hungary,9176.86
+936,28,2024-09-22,pending,low,False,2024-09-28,True,Slovakia,7508.16
+937,16,2024-10-06,approved,high,False,2024-10-07,True,Germany,6358.71
+938,47,2024-10-16,pending,low,True,2024-10-26,False,Czech Republic,870.42
+939,32,2024-09-26,approved,low,False,2024-10-02,True,Italy,7138.18
+940,47,2024-09-28,approved,high,False,2024-10-01,False,Italy,6419.45
+941,7,2024-10-08,approved,high,True,2024-10-17,True,Austria,7521.94
+942,46,2024-09-28,pending,high,False,2024-10-07,False,Hungary,871.94
+943,11,2024-10-14,approved,medium,True,2024-10-26,True,Slovakia,4874.82
+944,11,2024-10-16,approved,high,True,2024-10-22,False,Germany,3201.42
+945,9,2024-10-13,approved,high,True,2024-10-20,True,Czech Republic,8903.73
+946,36,2024-09-24,approved,high,True,2024-09-27,True,Germany,3334.83
+947,8,2024-10-09,approved,low,False,2024-10-16,True,Czech Republic,8945.99
+948,24,2024-09-26,pending,medium,True,2024-10-06,True,Italy,3611.31
+949,27,2024-09-23,approved,medium,False,2024-09-24,True,Slovakia,5918.71
+950,6,2024-10-05,approved,medium,True,2024-10-07,False,Czech Republic,9206.96
+951,13,2024-10-08,approved,high,False,2024-10-11,False,Czech Republic,8013.9
+952,45,2024-09-27,approved,medium,True,2024-10-08,True,Hungary,1454.13
+953,26,2024-10-15,approved,medium,False,2024-10-16,False,France,3516.04
+954,2,2024-10-18,approved,low,True,2024-10-24,True,Poland,5064.33
+955,48,2024-09-22,approved,low,False,2024-09-26,False,Germany,8446.17
+956,3,2024-10-09,approved,high,False,2024-10-20,True,Italy,4069.56
+957,24,2024-09-25,pending,low,False,2024-10-06,False,Czech Republic,4661.59
+958,12,2024-10-16,approved,high,False,2024-10-17,True,Czech Republic,5548.98
+959,44,2024-09-29,approved,medium,False,2024-10-02,True,Germany,7280.66
+960,10,2024-10-18,rejected,medium,False,2024-11-02,False,Poland,1232.96
+961,11,2024-10-20,approved,high,False,2024-10-22,True,France,7834.9
+962,13,2024-09-27,pending,high,True,2024-09-28,True,Hungary,7421.93
+963,1,2024-09-26,approved,low,False,2024-10-11,False,Slovakia,3753.23
+964,32,2024-10-09,approved,low,True,2024-10-14,True,Poland,8791.28
+965,20,2024-09-30,pending,medium,True,2024-10-15,False,Italy,2984.88
+966,49,2024-10-16,approved,low,True,2024-10-31,True,Poland,4558.21
+967,12,2024-10-20,approved,medium,True,2024-10-31,True,Germany,862.78
+968,19,2024-10-11,pending,medium,False,2024-10-13,True,France,7205.71
+969,31,2024-09-27,pending,medium,True,2024-10-02,False,Italy,1739.84
+970,36,2024-09-25,pending,high,True,2024-09-29,True,Italy,7408.48
+971,23,2024-09-26,approved,high,False,2024-10-07,False,Austria,3939.38
+972,37,2024-10-18,approved,medium,False,2024-10-27,False,Poland,2179.7
+973,2,2024-10-09,pending,high,False,2024-10-14,False,Poland,3718.1
+974,7,2024-10-05,approved,medium,True,2024-10-06,False,Austria,1819.63
+975,26,2024-10-11,approved,medium,True,2024-10-26,True,Hungary,4495.49
+976,18,2024-10-12,approved,high,False,2024-10-21,False,Hungary,6067.62
+977,6,2024-09-24,approved,low,True,2024-09-29,False,France,8862.94
+978,9,2024-09-21,approved,high,False,2024-09-24,False,Austria,9556.58
+979,19,2024-10-09,pending,medium,True,2024-10-15,False,Czech Republic,4621.32
+980,34,2024-09-26,approved,medium,True,2024-09-30,False,Czech Republic,7405.07
+981,38,2024-10-09,rejected,low,False,2024-10-18,False,Italy,868.36
+982,1,2024-10-19,rejected,medium,False,2024-10-25,True,Czech Republic,6378.96
+983,32,2024-10-07,approved,low,True,2024-10-09,True,Hungary,8378.24
+984,16,2024-10-17,approved,high,False,2024-10-24,True,France,9618.03
+985,24,2024-10-05,approved,high,False,2024-10-13,True,Germany,9123.57
+986,13,2024-10-16,approved,high,True,2024-10-24,False,Hungary,7893.2
+987,45,2024-09-29,pending,high,True,2024-10-14,False,Italy,3213.28
+988,50,2024-09-30,approved,medium,True,2024-10-14,True,Poland,3666.39
+989,29,2024-09-21,pending,medium,True,2024-09-25,False,Slovakia,5209.2
+990,14,2024-09-27,approved,medium,False,2024-10-01,True,Austria,8926.79
+991,36,2024-09-30,approved,high,True,2024-10-10,False,Italy,5436.3
+992,50,2024-10-04,approved,high,True,2024-10-14,False,France,9611.41
+993,37,2024-10-15,approved,medium,False,2024-10-30,True,Italy,4883.19
+994,5,2024-10-18,rejected,medium,False,2024-10-20,False,Poland,6788.93
+995,22,2024-10-04,approved,medium,False,2024-10-16,True,Austria,6791.66
+996,21,2024-10-01,approved,low,True,2024-10-15,True,France,6962.19
+997,17,2024-09-25,approved,low,True,2024-10-05,False,Germany,7529.78
+998,6,2024-10-16,approved,low,False,2024-10-17,False,Poland,9749.04
+999,47,2024-10-03,pending,medium,True,2024-10-15,False,France,3567.35
+1000,42,2024-10-09,rejected,medium,False,2024-10-11,True,Slovakia,4602.23

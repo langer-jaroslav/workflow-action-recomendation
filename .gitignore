@@ -1,0 +1,4 @@
+*.pyproj
+*.pyproj.user
+*.sln
+.vs

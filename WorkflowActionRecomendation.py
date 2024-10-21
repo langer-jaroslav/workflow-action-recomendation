@@ -114,5 +114,5 @@ def export_to_json(requests, filename):
 
 
 requests_list = generate_requests_list(1000)
-export_to_csv(requests_list, 'requests.csv')
-export_to_json(requests_list, 'requests.json')
+export_to_csv(requests_list, './data/requests.csv')
+export_to_json(requests_list, './data/requests.json')
