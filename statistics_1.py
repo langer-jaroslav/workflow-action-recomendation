@@ -18,12 +18,20 @@ correlation_data = data_encoded[['requested_items', 'total_value', 'is_urgent', 
 
 correlation_matrix = correlation_data.corr()
 
-plt.figure(figsize=(12, 10))
-sns.heatmap(correlation_matrix, annot=True, fmt=".2f", cmap='coolwarm')
+plt.figure(figsize=(16, 12))
+sns.heatmap(correlation_matrix, annot=True, fmt=".2f", cmap='coolwarm', annot_kws={"size": 10})
+plt.xticks(rotation=90, ha='center', fontsize=12)
+plt.yticks(fontsize=12)
+plt.title('Correlation Matrix', fontsize=16)
+
+
+plt.tight_layout()
+plt.subplots_adjust(bottom=0.3)
+
 plt.title('Correlation Matrix')
 
 os.remove(output_image_path)
-plt.savefig(output_image_path)
+plt.savefig(output_image_path, bbox_inches='tight')
 
 plt.show()
 
