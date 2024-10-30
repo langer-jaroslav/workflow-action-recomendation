@@ -12,7 +12,6 @@ class RequestPriority(Enum):
     HIGH = "high"
 
 class RequestStatus(Enum):
-    PENDING = 'Pending'
     APPROVED = 'Approved'
     REJECTED = 'Rejected'
 
@@ -55,62 +54,69 @@ class Request:
 
 def determine_status(requested_items, is_urgent, is_from_wholesaler, total_value, priority, 
                      price_per_item, order_type: OrderType):
-    base_reject_prob = 0.1
-    base_approve_prob = 0.15
+    # Adjusted initial probabilities for a more even balance
+    base_reject_prob = 0.5
+    base_approve_prob = 0.5
 
     # Order type influence
     if order_type == OrderType.MATERIAL_FOR_PRODUCTION:
-        base_approve_prob += 0.85
-        base_reject_prob -= 0.5
+        base_approve_prob += 0.35
+        base_reject_prob -= 0.15
     elif order_type == OrderType.OFFICE_EQUIPMENT:
-        base_reject_prob += 0.4
-        base_approve_prob += 0.1
+        base_reject_prob += 0.25
+        base_approve_prob += 0.05
     elif order_type == OrderType.OTHER:
-        base_reject_prob += 0.2
+        base_reject_prob += 0.15
 
     # Requested items
     if requested_items > 30:
-        base_reject_prob += 0.6
+        base_reject_prob += 0.15
     elif requested_items < 10:
-        base_approve_prob += 0.3
+        base_approve_prob += 0.15
 
     # Total value influence
     if total_value > 5000:
-        base_reject_prob += 0.8
+        base_reject_prob += 0.25
     elif total_value < 2000:
-        base_approve_prob += 0.6
+        base_approve_prob += 0.25
 
     # Urgency influence
-    if not is_urgent:
-        base_reject_prob += 0.7
+    if is_urgent:
+        base_approve_prob += 0.25
     else:
-        base_approve_prob += 0.8
+        base_reject_prob += 0.15
 
     # Wholesale supplier influence
     if is_from_wholesaler:
-        base_approve_prob += 0.7
+        base_approve_prob += 0.25
     else:
-        base_reject_prob += 0.5
+        base_reject_prob += 0.25
 
     # Price per item influence
     if price_per_item > 300:
-        base_reject_prob += 0.7
+        base_reject_prob += 0.25
     elif price_per_item < 100:
-        base_approve_prob += 0.6
+        base_approve_prob += 0.15
 
     # Priority influence
     if priority == RequestPriority.HIGH:
-        base_approve_prob += 0.9
+        base_approve_prob += 0.35
     elif priority == RequestPriority.LOW:
-        base_reject_prob += 0.7
+        base_reject_prob += 0.3
 
+    # Normalizing probabilities for a 50/50 target
+    total_prob = base_reject_prob + base_approve_prob
+    base_reject_prob /= total_prob
+    base_approve_prob /= total_prob
+
+    # Random decision with refined binary probabilities
     random_value = random.random()
     if random_value < base_reject_prob:
         return RequestStatus.REJECTED
-    elif random_value < base_reject_prob + base_approve_prob:
-        return RequestStatus.APPROVED
     else:
-        return RequestStatus.PENDING
+        return RequestStatus.APPROVED
+
+
 
 def generate_random_request(request_id):
     requested_items = random.randint(5, 40)
@@ -139,8 +145,33 @@ def generate_random_request(request_id):
 
 def generate_requests_list(num_requests):
     requests = []
+    approved_count = 0
+    rejected_count = 0
+    target_count = num_requests // 2  # Target count for each category
+
     for i in range(1, num_requests + 1):
-        requests.append(generate_random_request(i))
+        request = generate_random_request(i)
+
+        # Track counts to enforce 50/50 split
+        if request.status == RequestStatus.APPROVED:
+            if approved_count < target_count:
+                approved_count += 1
+                requests.append(request)
+            else:
+                # Force "Rejected" if "Approved" limit reached
+                request.status = RequestStatus.REJECTED
+                rejected_count += 1
+                requests.append(request)
+        elif request.status == RequestStatus.REJECTED:
+            if rejected_count < target_count:
+                rejected_count += 1
+                requests.append(request)
+            else:
+                # Force "Approved" if "Rejected" limit reached
+                request.status = RequestStatus.APPROVED
+                approved_count += 1
+                requests.append(request)
+
     return requests
 
 def export_to_csv(requests, filename):
