@@ -6,10 +6,6 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder, StandardScaler
 from torch.utils.data import Dataset, DataLoader
 
-# Kontrola dostupnosti GPU
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-print(f"Using device: {device}")
-
 # Načtení dat
 data = pd.read_csv('./data/requests.csv')
 
@@ -47,52 +43,59 @@ class RequestDataset(Dataset):
 train_dataset = RequestDataset(X_train, y_train)
 test_dataset = RequestDataset(X_test, y_test)
 
-train_loader = DataLoader(train_dataset, batch_size=16, shuffle=True)
-test_loader = DataLoader(test_dataset, batch_size=16, shuffle=False)
+train_loader = DataLoader(train_dataset, batch_size=32, shuffle=True)  # Zvýšená velikost batch
+test_loader = DataLoader(test_dataset, batch_size=32, shuffle=False)
 
-# Vylepšený model
-class EnhancedNN(nn.Module):
+# Další vylepšený model
+class EnhancedNN_v3(nn.Module):
     def __init__(self, input_size):
-        super(EnhancedNN, self).__init__()
+        super(EnhancedNN_v3, self).__init__()
         self.fc1 = nn.Linear(input_size, 128)
         self.bn1 = nn.BatchNorm1d(128)
         self.fc2 = nn.Linear(128, 64)
         self.bn2 = nn.BatchNorm1d(64)
         self.fc3 = nn.Linear(64, 32)
+        self.bn3 = nn.BatchNorm1d(32)
         self.fc4 = nn.Linear(32, 2)  # Dvě třídy: Approved a Rejected
-        self.relu = nn.ReLU()
-        self.dropout = nn.Dropout(0.4)
+        self.leaky_relu = nn.LeakyReLU()
+        self.dropout = nn.Dropout(0.3)
         
     def forward(self, x):
-        x = self.relu(self.bn1(self.fc1(x)))
+        x = self.leaky_relu(self.bn1(self.fc1(x)))
         x = self.dropout(x)
-        x = self.relu(self.bn2(self.fc2(x)))
+        x = self.leaky_relu(self.bn2(self.fc2(x)))
         x = self.dropout(x)
-        x = self.relu(self.fc3(x))
+        x = self.leaky_relu(self.bn3(self.fc3(x)))
+        x = self.dropout(x)
         x = self.fc4(x)
         return x
 
-# Inicializace modelu, loss funkce a optimalizátoru
+# Inicializace modelu, loss funkce a optimalizátoru s L2 regularizací
 input_size = X_train.shape[1]
-model = EnhancedNN(input_size).to(device)  # Přesun modelu na GPU, pokud je k dispozici
+model = EnhancedNN_v3(input_size)
 criterion = nn.CrossEntropyLoss()
-optimizer = optim.AdamW(model.parameters(), lr=0.0005)
+optimizer = optim.AdamW(model.parameters(), lr=0.001, weight_decay=0.01)  # L2 regularizace s weight_decay
 
-# Trénink modelu s vylepšením
-epochs = 30
+# Použití scheduleru pro dynamické snížení learning rate
+scheduler = optim.lr_scheduler.StepLR(optimizer, step_size=10, gamma=0.5)
+
+# Trénink modelu s opravou `running_loss`
+epochs = 30  # Zkrácený počet epoch na 30
 for epoch in range(epochs):
     model.train()
     running_loss = 0.0
     for inputs, labels in train_loader:
-        inputs, labels = inputs.to(device), labels.to(device)  # Přesun dat na GPU
         optimizer.zero_grad()
         outputs = model(inputs)
         loss = criterion(outputs, labels)
         loss.backward()
         optimizer.step()
-        running_loss += loss.item()
+        running_loss += loss.item()  # Přidání ztráty z každé dávky
     
-    print(f"Epoch [{epoch+1}/{epochs}], Loss: {running_loss/len(train_loader):.4f}")
+    # Vypočítání průměrné ztráty za epochu
+    avg_loss = running_loss / len(train_loader)
+    print(f"Epoch [{epoch+1}/{epochs}], Loss: {avg_loss:.4f}")
+
 
 # Vyhodnocení na testovací sadě
 model.eval()
@@ -100,7 +103,6 @@ correct = 0
 total = 0
 with torch.no_grad():
     for inputs, labels in test_loader:
-        inputs, labels = inputs.to(device), labels.to(device)  # Přesun testovacích dat na GPU
         outputs = model(inputs)
         _, predicted = torch.max(outputs, 1)
         total += labels.size(0)

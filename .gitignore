@@ -2,3 +2,4 @@
 *.pyproj.user
 *.sln
 .vs
+dnn_tuning
