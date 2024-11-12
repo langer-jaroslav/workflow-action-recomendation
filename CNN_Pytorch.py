@@ -1,15 +1,32 @@
 ﻿import pandas as pd
+import numpy as np
 import torch
 import torch.nn as nn
 import torch.optim as optim
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder, StandardScaler
+from sklearn.metrics import classification_report, accuracy_score
 from torch.utils.data import Dataset, DataLoader
 
-# Načtení dat
-data = pd.read_csv('./data/requests.csv')
+# Set random seed for reproducibility
+random_state = 42
+torch.manual_seed(random_state)
+np.random.seed(random_state)
 
-# Zpracování a příprava dat
+# Hyperparameters and configurations
+file_path = './data/requests.csv'
+test_size = 0.2
+batch_size = 32
+learning_rate = 0.001
+weight_decay = 0.01
+epochs = 30
+step_size = 10
+gamma = 0.5
+
+# Load data
+data = pd.read_csv(file_path)
+
+# Data preprocessing
 label_encoder = LabelEncoder()
 data['status'] = label_encoder.fit_transform(data['status'])  # 1 = Approved, 0 = Rejected
 data['priority'] = label_encoder.fit_transform(data['priority'])
@@ -17,18 +34,18 @@ data['order_type'] = label_encoder.fit_transform(data['order_type'])
 data['is_urgent'] = data['is_urgent'].astype(int)
 data['is_from_wholesaler'] = data['is_from_wholesaler'].astype(int)
 
-# Oddělení cíle a vstupů
+# Split features and target
 X = data.drop(['request_id', 'status'], axis=1).values
 y = data['status'].values
 
-# Normalizace vstupních dat
+# Normalize feature data
 scaler = StandardScaler()
 X = scaler.fit_transform(X)
 
-# Rozdělení na trénovací a testovací sadu
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+# Split into training and test sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=test_size, random_state=random_state)
 
-# Definice Datasetu pro PyTorch
+# Define Dataset class for PyTorch
 class RequestDataset(Dataset):
     def __init__(self, X, y):
         self.X = torch.tensor(X, dtype=torch.float32)
@@ -43,10 +60,11 @@ class RequestDataset(Dataset):
 train_dataset = RequestDataset(X_train, y_train)
 test_dataset = RequestDataset(X_test, y_test)
 
-train_loader = DataLoader(train_dataset, batch_size=32, shuffle=True)  # Zvýšená velikost batch
-test_loader = DataLoader(test_dataset, batch_size=32, shuffle=False)
+# Data loaders for training and test sets
+train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
+test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False)
 
-# Další vylepšený model
+# Define the neural network model
 class EnhancedNN_v3(nn.Module):
     def __init__(self, input_size):
         super(EnhancedNN_v3, self).__init__()
@@ -56,7 +74,7 @@ class EnhancedNN_v3(nn.Module):
         self.bn2 = nn.BatchNorm1d(64)
         self.fc3 = nn.Linear(64, 32)
         self.bn3 = nn.BatchNorm1d(32)
-        self.fc4 = nn.Linear(32, 2)  # Dvě třídy: Approved a Rejected
+        self.fc4 = nn.Linear(32, 2)  # Output layer for 2 classes
         self.leaky_relu = nn.LeakyReLU()
         self.dropout = nn.Dropout(0.3)
         
@@ -70,17 +88,14 @@ class EnhancedNN_v3(nn.Module):
         x = self.fc4(x)
         return x
 
-# Inicializace modelu, loss funkce a optimalizátoru s L2 regularizací
+# Initialize model, loss function, and optimizer
 input_size = X_train.shape[1]
 model = EnhancedNN_v3(input_size)
 criterion = nn.CrossEntropyLoss()
-optimizer = optim.AdamW(model.parameters(), lr=0.001, weight_decay=0.01)  # L2 regularizace s weight_decay
+optimizer = optim.AdamW(model.parameters(), lr=learning_rate, weight_decay=weight_decay)
+scheduler = optim.lr_scheduler.StepLR(optimizer, step_size=step_size, gamma=gamma)
 
-# Použití scheduleru pro dynamické snížení learning rate
-scheduler = optim.lr_scheduler.StepLR(optimizer, step_size=10, gamma=0.5)
-
-# Trénink modelu s opravou `running_loss`
-epochs = 30  # Zkrácený počet epoch na 30
+# Training loop with average loss calculation per epoch
 for epoch in range(epochs):
     model.train()
     running_loss = 0.0
@@ -90,22 +105,36 @@ for epoch in range(epochs):
         loss = criterion(outputs, labels)
         loss.backward()
         optimizer.step()
-        running_loss += loss.item()  # Přidání ztráty z každé dávky
+        running_loss += loss.item()
     
-    # Vypočítání průměrné ztráty za epochu
+    # Calculate average loss for the epoch
     avg_loss = running_loss / len(train_loader)
-    print(f"Epoch [{epoch+1}/{epochs}], Loss: {avg_loss:.4f}")
+    print(f"Epoch [{epoch+1}/{epochs}], Average Loss: {avg_loss:.4f}")
 
-
-# Vyhodnocení na testovací sadě
+# Evaluation on test set with classification report and accuracy
 model.eval()
-correct = 0
-total = 0
+y_true = []
+y_pred = []
 with torch.no_grad():
     for inputs, labels in test_loader:
         outputs = model(inputs)
         _, predicted = torch.max(outputs, 1)
-        total += labels.size(0)
-        correct += (predicted == labels).sum().item()
+        y_true.extend(labels.cpu().numpy())
+        y_pred.extend(predicted.cpu().numpy())
 
-print(f"Accuracy on test set: {100 * correct / total:.2f}%")
+# Generate and display results in desired format
+report = classification_report(y_true, y_pred, target_names=['Rejected', 'Approved'])
+accuracy = accuracy_score(y_true, y_pred)
+
+print("\nModel Hyperparameters:")
+print(f"  File path: {file_path}")
+print(f"  Test size: {test_size}")
+print(f"  Batch size: {batch_size}")
+print(f"  Learning rate: {learning_rate}")
+print(f"  Weight decay: {weight_decay}")
+print(f"  Epochs: {epochs}")
+print(f"  Step size for LR scheduler: {step_size}")
+print(f"  Gamma for LR scheduler: {gamma}")
+
+print(f"\nTest set accuracy: {accuracy:.3f}")
+print("\nClassification Report:\n", report)

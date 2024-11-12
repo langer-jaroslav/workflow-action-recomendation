@@ -1,0 +1,118 @@
+﻿--CNN (Tensorflow)
+    Best Model Hyperparameters:
+      dense_layers: 3
+      dense_units_0: 256
+      dropout: 0.30000000000000004
+      dense_units_1: 256
+      dense_units_2: 128
+
+    Main Parameters Used:
+      File path: ./data/requests.csv
+      Test size: 0.2
+      Random state: 42
+      Max trials: 5
+      Epochs: 50
+      Batch size: 16
+      Patience for early stopping: 5
+      Minimum learning rate: 1e-05
+      Initial learning rate: 0.001
+      Dense layer min: 2
+      Dense layer max: 3
+      Dense unit choices: [128, 256]
+      Dropout min: 0.2, Dropout max: 0.5, Dropout step: 0.1
+
+    Test set accuracy: 0.601
+
+    Classification Report:
+                   precision    recall  f1-score   support
+
+        Approved       0.62      0.58      0.60      1028
+        Rejected       0.58      0.62      0.60       972
+
+        accuracy                           0.60      2000
+       macro avg       0.60      0.60      0.60      2000
+    weighted avg       0.60      0.60      0.60      2000
+
+
+
+--CNN (Pytorch)
+    Model Hyperparameters:
+      File path: ./data/requests.csv
+      Test size: 0.2
+      Batch size: 32
+      Learning rate: 0.001
+      Weight decay: 0.01
+      Epochs: 30
+      Step size for LR scheduler: 10
+      Gamma for LR scheduler: 0.5
+
+    Test set accuracy: 0.599
+
+    Classification Report:
+                   precision    recall  f1-score   support
+
+        Rejected       0.60      0.64      0.62      1028
+        Approved       0.59      0.56      0.58       972
+
+        accuracy                           0.60      2000
+       macro avg       0.60      0.60      0.60      2000
+    weighted avg       0.60      0.60      0.60      2000
+
+
+
+--Random Forest
+    Best Model Hyperparameters from RandomizedSearchCV:
+      n_estimators: 700
+      min_samples_split: 5
+      min_samples_leaf: 4
+      max_depth: 10
+      bootstrap: True
+
+    Main Parameters Used:
+      File path: ./data/requests.csv
+      Test size: 0.3
+      Random state: 42
+      Number of iterations for RandomizedSearchCV: 50
+      Cross-validation folds: 5
+
+    Test set accuracy: 0.647
+
+    Classification Report:
+                   precision    recall  f1-score   support
+
+               0       0.69      0.53      0.60      1490
+               1       0.62      0.76      0.69      1510
+
+        accuracy                           0.65      3000
+       macro avg       0.65      0.65      0.64      3000
+    weighted avg       0.65      0.65      0.64      3000
+
+
+
+--XGBoost
+    Best Hyperparameters from RandomizedSearchCV:
+      subsample: 0.8
+      n_estimators: 200
+      max_depth: 3
+      learning_rate: 0.01
+      gamma: 0.3
+      colsample_bytree: 0.6
+
+    Main Parameters Used:
+      File path: ./data/requests.csv
+      Test size: 0.3
+      Random state: 42
+      Number of iterations for RandomizedSearchCV: 50
+      Cross-validation folds: 5
+
+    Test set accuracy: 0.647
+
+    Classification Report:
+                   precision    recall  f1-score   support
+
+               0       0.72      0.48      0.57      1490
+               1       0.61      0.81      0.70      1510
+
+        accuracy                           0.65      3000
+       macro avg       0.66      0.65      0.64      3000
+    weighted avg       0.66      0.65      0.64      3000
