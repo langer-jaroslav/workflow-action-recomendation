@@ -1,37 +1,37 @@
 ﻿--CNN (Tensorflow)
-    Best Model Hyperparameters:
-      dense_layers: 3
-      dense_units_0: 256
-      dropout: 0.30000000000000004
-      dense_units_1: 256
-      dense_units_2: 128
+Best Model Hyperparameters:
+  dense_layers: 3
+  dense_units_0: 256
+  dropout: 0.30000000000000004
+  dense_units_1: 256
+  dense_units_2: 128
 
-    Main Parameters Used:
-      File path: ./data/requests.csv
-      Test size: 0.2
-      Random state: 42
-      Max trials: 5
-      Epochs: 50
-      Batch size: 16
-      Patience for early stopping: 5
-      Minimum learning rate: 1e-05
-      Initial learning rate: 0.001
-      Dense layer min: 2
-      Dense layer max: 3
-      Dense unit choices: [128, 256]
-      Dropout min: 0.2, Dropout max: 0.5, Dropout step: 0.1
+Main Parameters Used:
+  File path: ./data/requests.csv
+  Test size: 0.2
+  Random state: 42
+  Max trials: 5
+  Epochs: 50
+  Batch size: 16
+  Patience for early stopping: 5
+  Minimum learning rate: 1e-05
+  Initial learning rate: 0.001
+  Dense layer min: 2
+  Dense layer max: 3
+  Dense unit choices: [128, 256]
+  Dropout min: 0.2, Dropout max: 0.5, Dropout step: 0.1
 
-    Test set accuracy: 0.601
+Test set accuracy: 0.663
 
-    Classification Report:
-                   precision    recall  f1-score   support
+Classification Report:
+               precision    recall  f1-score   support
 
-        Approved       0.62      0.58      0.60      1028
-        Rejected       0.58      0.62      0.60       972
+    Approved       0.74      0.53      0.62      1028
+    Rejected       0.62      0.81      0.70       972
 
-        accuracy                           0.60      2000
-       macro avg       0.60      0.60      0.60      2000
-    weighted avg       0.60      0.60      0.60      2000
+    accuracy                           0.66      2000
+   macro avg       0.68      0.67      0.66      2000
+weighted avg       0.68      0.66      0.66      2000
 
 
 
