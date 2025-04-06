@@ -4,35 +4,47 @@ import matplotlib.pyplot as plt
 import os
 
 file_path = './data/requests.csv'
-output_image_path = './data/correlation_matrix.png'
+output_image_path = './data/correlation_matrix_cleaned.png'
 
+# Načti dataset
 data = pd.read_csv(file_path)
 
+# Zakóduj status a order_type
 data_encoded = pd.get_dummies(data, columns=['status', 'order_type'], drop_first=False)
 
-# Select relevant columns for correlation analysis
-correlation_data = data_encoded[['requested_items', 'total_value', 'is_urgent', 'is_from_wholesaler',
-                                 'price_per_item'] +
-                                 [col for col in data_encoded.columns if 'status' in col] +
-                                 [col for col in data_encoded.columns if 'order_type' in col]]
+# Vyber jen relevantní sloupce
+selected_columns = [
+    'requested_items',
+    'total_value',
+    'price_per_item',
+    'request_age',
+    'risk_score'
+]
 
+# Přidej zakódovaný status a order_type
+selected_columns += [col for col in data_encoded.columns if col.startswith('status_')]
+selected_columns += [col for col in data_encoded.columns if col.startswith('order_type_')]
+
+# Vytvoř korelační matici
+correlation_data = data_encoded[selected_columns]
 correlation_matrix = correlation_data.corr()
 
-plt.figure(figsize=(16, 12))
-sns.heatmap(correlation_matrix, annot=True, fmt=".2f", cmap='coolwarm', annot_kws={"size": 10})
-plt.xticks(rotation=90, ha='center', fontsize=12)
-plt.yticks(fontsize=12)
-plt.title('Correlation Matrix', fontsize=16)
-
+# Vykresli heatmapu
+plt.figure(figsize=(14, 12))
+sns.heatmap(correlation_matrix, annot=True, fmt=".2f", cmap='coolwarm', annot_kws={"size": 9})
+plt.xticks(rotation=90, ha='center', fontsize=10)
+plt.yticks(fontsize=10)
+plt.title('Correlation Matrix (Cleaned)', fontsize=16)
 
 plt.tight_layout()
 plt.subplots_adjust(bottom=0.3)
 
-plt.title('Correlation Matrix')
+# Odstraň starý obrázek pokud existuje
+if os.path.exists(output_image_path):
+    os.remove(output_image_path)
 
-os.remove(output_image_path)
+# Ulož graf
 plt.savefig(output_image_path, bbox_inches='tight')
-
 plt.show()
 
-print(f"Correlation matrix heatmap saved as {output_image_path}")
+print(f"✅ Cleaned correlation matrix heatmap saved as {output_image_path}")
