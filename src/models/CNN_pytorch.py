@@ -1,168 +1,151 @@
-﻿import torch
-import torch.nn as nn
-import torch.optim as optim
-from torch.utils.data import DataLoader, TensorDataset
+﻿# Randomized hyperparameter search for PyTorch CNN
+
 import pandas as pd
 import numpy as np
+import torch
+import torch.nn as nn
+import torch.optim as optim
+from torch.utils.data import Dataset, DataLoader
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
-from sklearn.metrics import accuracy_score, classification_report
-import itertools
+from sklearn.metrics import accuracy_score, f1_score, classification_report
+from sklearn.utils import shuffle
+from itertools import product
+import random
 
-# 🔥 Load dataset
-file_path = "./data/requests.csv"
-data = pd.read_csv(file_path)
+# ========== CONFIGURATION ==========
+FILE_PATH = './data/requests.csv'
+RANDOM_STATE = 42
+N_COMBINATIONS = 20
+EPOCHS = 30
 
-# ❌ Remove `request_id` if it exists
-if "request_id" in data.columns:
-    data = data.drop(columns=["request_id"])
-    print("✅ `request_id` removed.")
+# ========== DATA PREPARATION ==========
+data = pd.read_csv(FILE_PATH)
+data['status'] = data['status'].map({'Approved': 1, 'Rejected': 0})
+data['urgency_vs_priority'] = data.apply(lambda row: int(row['is_urgent'] and row['priority'] == 'low'), axis=1)
+data = data.drop(columns=['request_id', 'employee_id', 'risk_score_category'])
+data = pd.get_dummies(data, drop_first=True)
 
-# 🎯 Encode target variable ('status') as binary (1 = Approved, 0 = Rejected)
-data['status'] = data['status'].apply(lambda x: 1 if x == 'Approved' else 0)
+X = data.drop('status', axis=1)
+y = data['status']
 
-# 🛠️ One-hot encoding for categorical variables
-X = pd.get_dummies(data.drop(columns=["status"]), drop_first=True)
-y = data['status'].values
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, stratify=y, random_state=RANDOM_STATE)
 
-# 📊 Train-test split
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
-
-# 📏 Normalize features (Standardization)
 scaler = StandardScaler()
 X_train = scaler.fit_transform(X_train)
 X_test = scaler.transform(X_test)
 
-# 🔄 Convert to PyTorch tensors
-X_train_tensor = torch.tensor(X_train, dtype=torch.float32)
-X_test_tensor = torch.tensor(X_test, dtype=torch.float32)
-y_train_tensor = torch.tensor(y_train, dtype=torch.float32).view(-1, 1)
-y_test_tensor = torch.tensor(y_test, dtype=torch.float32).view(-1, 1)
+X_train = X_train.reshape(-1, 1, X_train.shape[1])
+X_test = X_test.reshape(-1, 1, X_test.shape[1])
 
-# 🔄 Create DataLoader
-batch_size = 32
-train_dataset = TensorDataset(X_train_tensor, y_train_tensor)
-test_dataset = TensorDataset(X_test_tensor, y_test_tensor)
-train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
-test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False)
+class TabularDataset(Dataset):
+    def __init__(self, X, y):
+        self.X = torch.tensor(X, dtype=torch.float32)
+        self.y = torch.tensor(y.values, dtype=torch.float32)
 
-class CNNClassifier(nn.Module):
-    def __init__(self, input_size, hidden_size, dropout):
-        super(CNNClassifier, self).__init__()
-        self.fc1 = nn.Linear(input_size, hidden_size)
-        self.bn1 = nn.BatchNorm1d(hidden_size)
-        self.fc2 = nn.Linear(hidden_size, hidden_size // 2)
-        self.bn2 = nn.BatchNorm1d(hidden_size // 2)
-        self.fc3 = nn.Linear(hidden_size // 2, 64)
-        self.bn3 = nn.BatchNorm1d(64)
-        self.fc4 = nn.Linear(64, 1)
-        self.relu = nn.ReLU()
-        self.dropout = nn.Dropout(dropout)
-        self.sigmoid = nn.Sigmoid()
+    def __len__(self):
+        return len(self.y)
+
+    def __getitem__(self, idx):
+        return self.X[idx], self.y[idx]
+
+train_dataset = TabularDataset(X_train, y_train)
+test_dataset = TabularDataset(X_test, y_test)
+
+# ========== CNN DEFINITION ==========
+class CNNTabular(nn.Module):
+    def __init__(self, input_features, conv_filters, dropout_rate):
+        super().__init__()
+        self.net = nn.Sequential(
+            nn.Conv1d(1, conv_filters, kernel_size=3, padding=1),
+            nn.BatchNorm1d(conv_filters),
+            nn.LeakyReLU(),
+            nn.Conv1d(conv_filters, conv_filters * 2, kernel_size=3, padding=1),
+            nn.BatchNorm1d(conv_filters * 2),
+            nn.LeakyReLU(),
+            nn.AdaptiveMaxPool1d(1),
+            nn.Flatten(),
+            nn.Linear(conv_filters * 2, 64),
+            nn.Dropout(dropout_rate),
+            nn.ReLU(),
+            nn.Linear(64, 1),
+            nn.Sigmoid()
+        )
 
     def forward(self, x):
-        x = self.relu(self.bn1(self.fc1(x)))
-        x = self.dropout(x)
-        x = self.relu(self.bn2(self.fc2(x)))
-        x = self.dropout(x)
-        x = self.relu(self.bn3(self.fc3(x)))
-        x = self.dropout(x)
-        x = self.sigmoid(self.fc4(x))
-        return x
+        return self.net(x).squeeze()
 
-    
+# ========== HYPERPARAMETER SPACE ==========
+hyper_space = {
+    'lr': [1e-4, 3e-4, 1e-3],
+    'batch_size': [32, 64, 128],
+    'dropout': [0.3, 0.4, 0.5],
+    'conv_filters': [32, 64, 128]
+}
 
-# Možné hodnoty hyperparametrů
-lr_values = [0.0001, 0.001, 0.005]
-batch_sizes = [16, 32, 64]
-dropout_values = [0.3, 0.4, 0.5]
-hidden_sizes = [128, 256, 512]
-weight_decay_values = [0, 1e-4, 1e-3]
-
-# Všechny kombinace hyperparametrů
-hyperparam_combinations = list(itertools.product(lr_values, batch_sizes, dropout_values, hidden_sizes, weight_decay_values))
-
+param_combinations = random.sample(list(product(*hyper_space.values())), N_COMBINATIONS)
 best_acc = 0
-best_params = None
+best_f1 = 0
+best_config = None
+best_y_true = []
+best_y_pred = []
 
-for lr, batch_size, dropout, hidden_size, weight_decay in hyperparam_combinations:
-    print(f"🔍 Testing: lr={lr}, batch_size={batch_size}, dropout={dropout}, hidden_size={hidden_size}, weight_decay={weight_decay}")
-
-    # 🔥 Definice modelu
-    model = CNNClassifier(input_size=X_train.shape[1], hidden_size=hidden_size, dropout=dropout)
-    criterion = nn.BCELoss()
-    optimizer = optim.AdamW(model.parameters(), lr=lr, weight_decay=weight_decay)
-
-    # ⚡ Rychlý testovací trénink (10 epoch)
-    for epoch in range(10):
-        model.train()
-        running_loss = 0.0
-        for batch_X, batch_y in train_loader:
-            optimizer.zero_grad()
-            outputs = model(batch_X)
-            loss = criterion(outputs, batch_y)
-            loss.backward()
-            optimizer.step()
-            running_loss += loss.item()
-
-    # 🚀 Evaluace
-    model.eval()
-    y_pred_list = []
-    with torch.no_grad():
-        for batch_X, _ in test_loader:
-            y_test_pred = model(batch_X)
-            y_pred_list.extend(y_test_pred.squeeze().tolist())
-
-    # 📊 Výpočet metrik
-    y_pred_bin = [1 if x >= 0.5 else 0 for x in y_pred_list]
-    accuracy = accuracy_score(y_test, y_pred_bin)
-
-    print(f"🎯 Accuracy: {accuracy:.3f}")
-
-    # 🎯 Uložit nejlepší hyperparametry
-    if accuracy > best_acc:
-        best_acc = accuracy
-        best_params = (lr, batch_size, dropout, hidden_size, weight_decay)
-
-print(f"\n✅ Best Model: lr={best_params[0]}, batch_size={best_params[1]}, dropout={best_params[2]}, hidden_size={best_params[3]}, weight_decay={best_params[4]}")
-
-# 🎯 Použití nejlepších hyperparametrů
-lr, batch_size, dropout, hidden_size, weight_decay = best_params
-
-model = CNNClassifier(input_size=X_train.shape[1], hidden_size=hidden_size, dropout=dropout)
-criterion = nn.BCELoss()
-optimizer = optim.AdamW(model.parameters(), lr=lr, weight_decay=weight_decay)
-
-# 🏋️‍♂️ Finální trénink (50 epoch)
-num_epochs = 50
-for epoch in range(num_epochs):
+# ========== TRAINING LOOP ==========
+def train_one(model, loader, optimizer, criterion):
     model.train()
-    running_loss = 0.0
-    for batch_X, batch_y in train_loader:
+    for X_batch, y_batch in loader:
         optimizer.zero_grad()
-        outputs = model(batch_X)
-        loss = criterion(outputs, batch_y)
+        output = model(X_batch)
+        loss = criterion(output, y_batch)
         loss.backward()
         optimizer.step()
-        running_loss += loss.item()
 
-    print(f"Epoch [{epoch+1}/{num_epochs}], Loss: {running_loss / len(train_loader):.4f}")
+for i, (lr, batch_size, dropout, conv_filters) in enumerate(param_combinations):
+    train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
+    test_loader = DataLoader(test_dataset, batch_size=128, shuffle=False)
 
-    # 🚀 Evaluation
-model.eval()
-y_pred_list = []
-with torch.no_grad():
-    for batch_X, _ in test_loader:
-        y_test_pred = model(batch_X)
-        y_pred_list.extend(y_test_pred.squeeze().tolist())
+    model = CNNTabular(X_train.shape[2], conv_filters, dropout)
+    optimizer = optim.Adam(model.parameters(), lr=lr)
+    criterion = nn.BCELoss()
 
+    for epoch in range(EPOCHS):
+        train_one(model, train_loader, optimizer, criterion)
 
-# 📊 Výpočet metrik
-y_pred_bin = [1 if x >= 0.5 else 0 for x in y_pred_list]
-accuracy = accuracy_score(y_test, y_pred_bin)
-class_report = classification_report(y_test, y_pred_bin)
+    model.eval()
+    y_true, y_pred = [], []
+    with torch.no_grad():
+        for X_batch, y_batch in test_loader:
+            preds = model(X_batch)
+            y_true.extend(y_batch.int().numpy())
+            y_pred.extend((preds >= 0.5).int().numpy())
 
-print(f"\n--CNN PyTorch Model")
-print(f"    Test set accuracy: {accuracy:.3f}\n")
-print("    Classification Report:")
-print(class_report)
+    acc = accuracy_score(y_true, y_pred)
+    f1 = f1_score(y_true, y_pred)
+    print(f"[{i+1}/{N_COMBINATIONS}] acc={acc:.4f} f1={f1:.4f} | lr={lr}, batch={batch_size}, dropout={dropout}, filters={conv_filters}")
+
+    if acc > best_acc:
+        best_acc = acc
+        best_f1 = f1
+        best_config = (lr, batch_size, dropout, conv_filters)
+        best_y_true = y_true
+        best_y_pred = y_pred
+
+# ========== FINAL BEST ==========
+print("\n--PyTorch CNN")
+print("    Best Model Hyperparameters:")
+print(f"      learning_rate: {best_config[0]}")
+print(f"      batch_size: {best_config[1]}")
+print(f"      dropout: {best_config[2]}")
+print(f"      conv_filters: {best_config[3]}")
+
+print("\n    Main Parameters Used:")
+print(f"      File path: {FILE_PATH}")
+print(f"      Train size: {len(X_train)}")
+print(f"      Test size: {len(X_test)}")
+print(f"      Random state: {RANDOM_STATE}")
+print(f"      Number of parameter combinations: {N_COMBINATIONS}")
+print(f"      Epochs: {EPOCHS}")
+
+print(f"\n    Best test set accuracy: {best_acc:.3f}")
+print("\n    Classification Report:")
+print(classification_report(best_y_true, best_y_pred, digits=3))

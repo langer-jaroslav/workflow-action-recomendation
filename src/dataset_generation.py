@@ -3,12 +3,10 @@ import random
 import pandas as pd
 import numpy as np
 from enum import Enum
-
-# Počet požadavků
 rows_to_generate = 10000
 file_path = "./data/requests.csv"
 
-# Enumy
+# Enums
 class RequestPriority(Enum):
     LOW = "low"
     MEDIUM = "medium"
@@ -30,7 +28,6 @@ class EmployeePosition(Enum):
     MANAGER = "manager"
     PURCHASING_SPECIALIST = "purchasing_specialist"
 
-# Pravděpodobnosti typů objednávek podle pozice
 position_order_type_weights = {
     EmployeePosition.SECRETARY: [0.0, 0.8, 0.2],
     EmployeePosition.TECHNICIAN: [0.6, 0.2, 0.2],
@@ -39,7 +36,6 @@ position_order_type_weights = {
     EmployeePosition.PURCHASING_SPECIALIST: [0.5, 0.3, 0.2]
 }
 
-# Funkce pro kategorii rizika
 def categorize_risk(risk_score):
     if risk_score <= 0:
         return "low"
@@ -48,7 +44,6 @@ def categorize_risk(risk_score):
     else:
         return "high"
 
-# Funkce pro určení schválení
 def determine_status(risk_score):
     if risk_score >= 5:
         return RequestStatus.REJECTED
@@ -57,7 +52,6 @@ def determine_status(risk_score):
     else:
         return random.choices([RequestStatus.APPROVED, RequestStatus.REJECTED], weights=[0.6, 0.4])[0]
 
-# Zaměstnanci
 num_employees = 200
 employee_ids = [f"EMP{str(i).zfill(4)}" for i in range(1, num_employees + 1)]
 employee_positions = {
@@ -65,7 +59,6 @@ employee_positions = {
     for emp_id in employee_ids
 }
 
-# Vygeneruj jeden požadavek
 def generate_random_request(request_id):
     employee_id = random.choice(employee_ids)
     position = employee_positions[employee_id]
@@ -88,7 +81,6 @@ def generate_random_request(request_id):
         weights=position_order_type_weights[position]
     )[0]
 
-    # Výpočet risk_score
     risk_score = 0
 
     if total_value > 5000:
@@ -128,7 +120,6 @@ def generate_random_request(request_id):
     elif order_type == OrderType.MATERIAL_FOR_PRODUCTION:
         risk_score -= 2
 
-    # Náhodný šum ±1
     risk_score += random.choice([-1, 0, 1])
 
     status = determine_status(risk_score)
@@ -150,7 +141,6 @@ def generate_random_request(request_id):
         "risk_score_category": risk_category
     }
 
-# Generuj seznam požadavků
 def generate_requests_list(num_requests):
     requests = []
     approved_count = 0
@@ -177,7 +167,7 @@ def generate_requests_list(num_requests):
 
     return requests
 
-# Export do CSV
+# Export CSV
 def export_to_csv(requests, filename):
     df = pd.DataFrame(requests)
     features_to_square = ["requested_items", "total_value", "price_per_item", "request_age", "risk_score"]
@@ -185,10 +175,9 @@ def export_to_csv(requests, filename):
         df[f"{feature}_squared"] = np.power(df[feature], 2)
     df.to_csv(filename, index=False)
 
-# Spusť generaci
 requests_list = generate_requests_list(rows_to_generate)
 if os.path.exists(file_path):
     os.remove(file_path)
 export_to_csv(requests_list, file_path)
 
-print(f"✅ Clean dataset generated and saved to {file_path}")
+print(f"Clean dataset generated and saved to {file_path}")

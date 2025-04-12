@@ -1,104 +1,109 @@
 ﻿import pandas as pd
 import numpy as np
-import xgboost as xgb
-from sklearn.model_selection import train_test_split, RandomizedSearchCV
+import matplotlib.pyplot as plt
+from xgboost import XGBClassifier
+from sklearn.model_selection import train_test_split, ParameterSampler
 from sklearn.metrics import accuracy_score, classification_report
-from sklearn.utils import shuffle
+import warnings
+warnings.filterwarnings("ignore")
 
-# Parameters
-file_path = "./data/requests.csv"
-test_size = 0.3
-random_state = 42
+# ========== GLOBAL CONFIGURATION ==========
+FILE_PATH = './data/requests.csv'
+RANDOM_STATE = 42
+N_COMBINATIONS = 200
+TEST_SIZE = 0.2
+VALIDATION_SIZE = 0.25  # 25% of 80% = 20%
 
-# Load dataset
-data = pd.read_csv(file_path)
+# ========== LOAD & PREPROCESS DATA ==========
+data = pd.read_csv(FILE_PATH)
 
-# ❌ Remove `request_id` if it exists
-if "request_id" in data.columns:
-    data = data.drop(columns=["request_id"])
-    print("✅ `request_id` removed.")
+data['status'] = data['status'].map({'Approved': 1, 'Rejected': 0})
 
-# 🔀 Shuffle dataset to ensure randomness
-data = shuffle(data, random_state=random_state)
-
-# 📌 Feature Engineering - creating new features
-data['log_total_value'] = np.log1p(data['total_value'])  # Log transformation of total value
-data['wholesale_urgency'] = data['is_from_wholesaler'] * data['is_urgent']  # Interaction of wholesale and urgency
-data['sqrt_total_value'] = np.sqrt(data['total_value'])  # Square root transformation
-data['total_urgent'] = data['total_value'] * data['is_urgent']  # Interaction feature
-data['price_age_ratio'] = data['price_per_item'] / (data['request_age'] + 1)  # Avoid division by zero
-data['risk_bin'] = pd.qcut(data['risk_score'], q=4, labels=[1, 2, 3, 4])  # Binning risk_score into categories
-# ❌ Drop weak features
-columns_to_drop = ["requested_items", "total_value", "price_per_item", "order_type_other"]
-data = data.drop(columns=[col for col in columns_to_drop if col in data.columns])
-
-# Encode target variable ('status') as binary (1 = Approved, 0 = Rejected)
-data['status'] = data['status'].apply(lambda x: 1 if x == 'Approved' else 0)
-
-# One-hot encoding for categorical variables
-X = pd.get_dummies(data.drop(columns=["status"]), drop_first=True)
-y = data['status']
-
-# Split data into training and testing sets
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=test_size, random_state=random_state)
-
-# 📌 Hyperparameter tuning - defining search space for XGBoost
-param_dist_xgb = {
-    'n_estimators': np.arange(400, 1001, 200),  # Number of boosting rounds
-    'max_depth': [5, 7, 10],  # Maximum tree depth
-    'learning_rate': [0.01, 0.05, 0.1],  # Learning rate
-    'subsample': [0.7, 0.8, 0.9],  # Subsample ratio of training instances
-    'colsample_bytree': [0.7, 0.8, 0.9],  # Subsample ratio of columns when constructing each tree
-    'gamma': [0.1, 0.2, 0.3],  # Minimum loss reduction for split
-    'reg_lambda': [1, 5, 10],  # L2 regularization
-    'reg_alpha': [0, 1, 3],  # L1 regularization
-}
-
-# RandomizedSearchCV to find the best hyperparameters
-random_search_xgb = RandomizedSearchCV(
-    estimator=xgb.XGBClassifier(use_label_encoder=False, eval_metric='logloss', random_state=random_state),
-    param_distributions=param_dist_xgb,
-    n_iter=50,  # Number of random hyperparameter combinations to try
-    scoring='accuracy',
-    cv=5,  # 5-fold cross-validation
-    random_state=random_state,
-    n_jobs=-1,
-    verbose=1
+data['urgency_vs_priority'] = data.apply(
+    lambda row: int(row['is_urgent'] and row['priority'] == 'low'),
+    axis=1
 )
 
-# **Run hyperparameter tuning**
-random_search_xgb.fit(X_train, y_train)
+data = data.drop(columns=['request_id', 'employee_id', 'risk_score_category'])
 
-# Retrieve the best hyperparameters
-best_params_xgb = random_search_xgb.best_params_
-best_score_xgb = random_search_xgb.best_score_
+data = pd.get_dummies(data, drop_first=True)
 
-# **Train the XGBoost model with best hyperparameters**
-best_xgb_model = xgb.XGBClassifier(**best_params_xgb, use_label_encoder=False, eval_metric='logloss', random_state=random_state)
-best_xgb_model.fit(X_train, y_train)
+X = data.drop('status', axis=1)
+y = data['status']
 
-# **Predictions on test data**
-y_pred_xgb = best_xgb_model.predict(X_test)
+X_temp, X_test, y_temp, y_test = train_test_split(
+    X, y, test_size=TEST_SIZE, random_state=RANDOM_STATE, stratify=y
+)
 
-# **Compute accuracy and classification report**
-accuracy_xgb = accuracy_score(y_test, y_pred_xgb)
-classification_rep_xgb = classification_report(y_test, y_pred_xgb)
+X_train, X_val, y_train, y_val = train_test_split(
+    X_temp, y_temp, test_size=VALIDATION_SIZE, random_state=RANDOM_STATE, stratify=y_temp
+)
 
-# 📌 Print formatted results
-print("\n--XGBoost")
-print("    Best Model Hyperparameters from RandomizedSearchCV:")
-for param, value in best_params_xgb.items():
-    print(f"      {param}: {value}")
+# ========== DEFINE HYPERPARAMETER SPACE ==========
+param_dist = {
+    "n_estimators": [100, 300, 500, 700, 1000],
+    "max_depth": [5, 7, 9, 10, 12],
+    "learning_rate": [0.01, 0.03, 0.05, 0.1],
+    "subsample": [0.6, 0.7, 0.8, 1.0],
+    "colsample_bytree": [0.6, 0.7, 0.8, 1.0],
+    "reg_lambda": [0, 1, 10, 50],
+    "reg_alpha": [0, 0.1, 1, 10],
+    "scale_pos_weight": [1, 1.5, 2, 3],
+    "gamma": [0, 0.1, 0.3, 1, 5],              
+    "min_child_weight": [1, 2, 5, 10],            
+    "max_delta_step": [0, 1, 5]            
+}
 
-print("\n    Main Parameters Used:")
-print(f"      File path: {file_path}")
-print(f"      Test size: {test_size}")
-print(f"      Random state: {random_state}")
-print(f"      Number of iterations for RandomizedSearchCV: 50")
-print(f"      Cross-validation folds: 5")
+param_list = list(ParameterSampler(param_dist, n_iter=N_COMBINATIONS, random_state=RANDOM_STATE))
 
-print(f"\n    Best cross-validation accuracy: {best_score_xgb:.3f}")
-print(f"    Test set accuracy: {accuracy_xgb:.3f}\n")
+# ========== TRAINING LOOP ==========
+best_model = None
+best_params = None
+best_val_acc = 0
+best_test_acc = 0
+best_y_pred = None
 
-print("    Classification Report:")
-print(classification_rep_xgb)
+print(f"\n🔬 Testing {N_COMBINATIONS} parameter combinations...\n")
+
+for i, params in enumerate(param_list):
+    model = XGBClassifier(
+        use_label_encoder=False,
+        random_state=RANDOM_STATE,
+        eval_metric='logloss',
+        **params
+    )
+
+    model.fit(X_train, y_train)
+
+    val_pred = model.predict(X_val)
+    val_acc = accuracy_score(y_val, val_pred)
+
+    if val_acc > best_val_acc:
+        best_val_acc = val_acc
+        best_test_acc = accuracy_score(y_test, model.predict(X_test))
+        best_model = model
+        best_params = params
+        best_y_pred = model.predict(X_test)
+
+    print(f"[{i+1:02}/{N_COMBINATIONS}] val_acc={val_acc:.4f}  best_so_far={best_val_acc:.4f}")
+
+# ========== FINAL OUTPUT ==========
+print("\n\n🔥 Best Model Hyperparameters:")
+for k, v in best_params.items():
+    print(f"  {k}: {v}")
+
+print(f"""
+Main Parameters Used:
+  File path: {FILE_PATH}
+  Train size: {len(X_train)}
+  Validation size: {len(X_val)}
+  Test size: {len(X_test)}
+  Random state: {RANDOM_STATE}
+  Number of parameter combinations: {N_COMBINATIONS}
+""")
+
+print(f"Best validation accuracy: {best_val_acc:.3f}")
+print(f"Test set accuracy: {best_test_acc:.3f}\n")
+
+print("Classification Report:")
+print(classification_report(y_test, best_y_pred, digits=3))

@@ -1,99 +1,104 @@
 import pandas as pd
 import numpy as np
-from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import LabelEncoder, StandardScaler
-from sklearn.utils.class_weight import compute_class_weight
-from sklearn.metrics import classification_report, accuracy_score
 import tensorflow as tf
-from keras_tuner import RandomSearch
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.metrics import classification_report, accuracy_score, f1_score
+import random
+from itertools import product
 
-# Parameters
-FILE_PATH = "./data/requests.csv"
-TEST_SIZE = 0.2
+# ========== CONFIGURATION ==========
+FILE_PATH = './data/requests.csv'
 RANDOM_STATE = 42
-MAX_TRIALS = 5
-EPOCHS = 50
-BATCH_SIZE = 16
-PATIENCE = 5
-MIN_LR = 1e-5
-INITIAL_LR = 1e-3
-DENSE_LAYER_MIN = 2
-DENSE_LAYER_MAX = 3
-DENSE_UNIT_CHOICES = [128, 256]
-DROPOUT_MIN, DROPOUT_MAX, DROPOUT_STEP = 0.2, 0.5, 0.1
+N_COMBINATIONS = 20
+EPOCHS = 30
 
-# Data loading and preprocessing
+# ========== DATA PREPARATION ==========
 data = pd.read_csv(FILE_PATH)
-label_encoder = LabelEncoder()
-data['status_encoded'] = label_encoder.fit_transform(data['status'])
-X = pd.get_dummies(data[['requested_items', 'is_urgent', 'is_from_wholesaler', 'total_value', 'price_per_item', 'priority', 'order_type']], drop_first=True)
+data['status'] = data['status'].map({'Approved': 1, 'Rejected': 0})
+data['urgency_vs_priority'] = data.apply(lambda row: int(row['is_urgent'] and row['priority'] == 'low'), axis=1)
+data = data.drop(columns=['request_id', 'employee_id', 'risk_score_category'])
+data = pd.get_dummies(data, drop_first=True)
+
+X = data.drop('status', axis=1)
+y = data['status']
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, stratify=y, random_state=RANDOM_STATE)
+
 scaler = StandardScaler()
-X[['requested_items', 'total_value', 'price_per_item']] = scaler.fit_transform(X[['requested_items', 'total_value', 'price_per_item']])
-X = X.values.astype('float32')
-y = data['status_encoded'].values.astype('float32')
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=TEST_SIZE, random_state=RANDOM_STATE)
+X_train = scaler.fit_transform(X_train)
+X_test = scaler.transform(X_test)
 
-# Compute class weights
-class_weights = compute_class_weight('balanced', classes=np.unique(y_train), y=y_train)
-class_weight_dict = {i: class_weights[i] for i in range(len(class_weights))}
+X_train = X_train.reshape(-1, X_train.shape[1], 1)
+X_test = X_test.reshape(-1, X_test.shape[1], 1)
 
-# Model building function for tuning
-def build_dnn_model(hp):
-    model = tf.keras.Sequential()
-    model.add(tf.keras.layers.Input(shape=(X.shape[1],)))
-    
-    # Add dense layers based on hyperparameters
-    for i in range(hp.Int("dense_layers", DENSE_LAYER_MIN, DENSE_LAYER_MAX)):
-        model.add(tf.keras.layers.Dense(units=hp.Choice(f"dense_units_{i}", DENSE_UNIT_CHOICES), activation='relu'))
-        model.add(tf.keras.layers.BatchNormalization())
-        model.add(tf.keras.layers.Dropout(hp.Float("dropout", DROPOUT_MIN, DROPOUT_MAX, step=DROPOUT_STEP)))
-    
-    model.add(tf.keras.layers.Flatten())
-    model.add(tf.keras.layers.Dense(1, activation='sigmoid'))
-    model.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=INITIAL_LR), loss="binary_crossentropy", metrics=["accuracy"])
+# ========== HYPERPARAMETER SPACE ==========
+hyper_space = {
+    'lr': [1e-4, 3e-4, 1e-3],
+    'batch_size': [32, 64, 128],
+    'dropout': [0.3, 0.4, 0.5],
+    'conv_filters': [32, 64, 128]
+}
+
+param_combinations = random.sample(list(product(*hyper_space.values())), N_COMBINATIONS)
+best_acc = 0
+best_f1 = 0
+best_config = None
+best_y_true = []
+best_y_pred = []
+
+# ========== MODEL TRAINING ==========
+def build_model(input_shape, conv_filters, dropout_rate, learning_rate):
+    model = tf.keras.Sequential([
+        tf.keras.layers.Conv1D(conv_filters, kernel_size=3, padding='same', activation='relu', input_shape=input_shape),
+        tf.keras.layers.BatchNormalization(),
+        tf.keras.layers.Conv1D(conv_filters * 2, kernel_size=3, padding='same', activation='relu'),
+        tf.keras.layers.BatchNormalization(),
+        tf.keras.layers.GlobalMaxPooling1D(),
+        tf.keras.layers.Dense(64, activation='relu'),
+        tf.keras.layers.Dropout(dropout_rate),
+        tf.keras.layers.Dense(1, activation='sigmoid')
+    ])
+
+    model.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=learning_rate),
+                  loss='binary_crossentropy',
+                  metrics=['accuracy'])
     return model
 
-# Hyperparameter tuning
-tuner = RandomSearch(
-    build_dnn_model, objective="val_accuracy", max_trials=MAX_TRIALS, executions_per_trial=1,
-    directory="dnn_tuning", project_name="dnn_weighted_flatten")
+for i, (lr, batch_size, dropout, conv_filters) in enumerate(param_combinations):
+    model = build_model(input_shape=(X_train.shape[1], 1), conv_filters=conv_filters, dropout_rate=dropout, learning_rate=lr)
+    model.fit(X_train, y_train, epochs=EPOCHS, batch_size=batch_size, verbose=0)
 
-# Training with early stopping and learning rate scheduler
-lr_scheduler = tf.keras.callbacks.ReduceLROnPlateau(monitor='val_loss', factor=0.5, patience=3, min_lr=MIN_LR)
-early_stopping = tf.keras.callbacks.EarlyStopping(monitor='val_loss', patience=PATIENCE, restore_best_weights=True)
-tuner.search(X_train, y_train, epochs=EPOCHS, validation_data=(X_test, y_test), batch_size=BATCH_SIZE, 
-             callbacks=[early_stopping, lr_scheduler], class_weight=class_weight_dict)
+    y_pred_prob = model.predict(X_test).flatten()
+    y_pred = (y_pred_prob >= 0.5).astype(int)
 
-# Select best model and evaluate
-best_model = tuner.get_best_models(num_models=1)[0]
-test_loss, test_accuracy = best_model.evaluate(X_test, y_test)
+    acc = accuracy_score(y_test, y_pred)
+    f1 = f1_score(y_test, y_pred)
+    print(f"[{i+1}/{N_COMBINATIONS}] acc={acc:.4f} f1={f1:.4f} | lr={lr}, batch={batch_size}, dropout={dropout}, filters={conv_filters}")
 
-# Predictions and classification report
-y_pred = (best_model.predict(X_test) > 0.5).astype("int32")
-report = classification_report(y_test, y_pred, target_names=label_encoder.classes_)
-accuracy = accuracy_score(y_test, y_pred)
+    if acc > best_acc:
+        best_acc = acc
+        best_f1 = f1
+        best_config = (lr, batch_size, dropout, conv_filters)
+        best_y_true = y_test
+        best_y_pred = y_pred
 
-# Display results
-print("\nBest Model Hyperparameters:")
-best_hps = tuner.oracle.get_best_trials(num_trials=1)[0].hyperparameters.values
-for param, value in best_hps.items():
-    print(f"  {param}: {value}")
+# ========== FINAL BEST ==========
+print("\n--TensorFlow CNN")
+print("    Best Model Hyperparameters:")
+print(f"      learning_rate: {best_config[0]}")
+print(f"      batch_size: {best_config[1]}")
+print(f"      dropout: {best_config[2]}")
+print(f"      conv_filters: {best_config[3]}")
 
-# Display all main parameters
-print("\nMain Parameters Used:")
-print(f"  File path: {FILE_PATH}")
-print(f"  Test size: {TEST_SIZE}")
-print(f"  Random state: {RANDOM_STATE}")
-print(f"  Max trials: {MAX_TRIALS}")
-print(f"  Epochs: {EPOCHS}")
-print(f"  Batch size: {BATCH_SIZE}")
-print(f"  Patience for early stopping: {PATIENCE}")
-print(f"  Minimum learning rate: {MIN_LR}")
-print(f"  Initial learning rate: {INITIAL_LR}")
-print(f"  Dense layer min: {DENSE_LAYER_MIN}")
-print(f"  Dense layer max: {DENSE_LAYER_MAX}")
-print(f"  Dense unit choices: {DENSE_UNIT_CHOICES}")
-print(f"  Dropout min: {DROPOUT_MIN}, Dropout max: {DROPOUT_MAX}, Dropout step: {DROPOUT_STEP}")
+print("\n    Main Parameters Used:")
+print(f"      File path: {FILE_PATH}")
+print(f"      Train size: {len(X_train)}")
+print(f"      Test size: {len(X_test)}")
+print(f"      Random state: {RANDOM_STATE}")
+print(f"      Number of parameter combinations: {N_COMBINATIONS}")
+print(f"      Epochs: {EPOCHS}")
 
-print(f"\nTest set accuracy: {test_accuracy:.3f}")
-print("\nClassification Report:\n", report)
+print(f"\n    Best test set accuracy: {best_acc:.3f}")
+print("\n    Classification Report:")
+print(classification_report(best_y_true, best_y_pred, digits=3))

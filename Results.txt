@@ -1,125 +1,126 @@
-﻿--CNN (Tensorflow)
-Best Model Hyperparameters:
-  dense_layers: 3
-  dense_units_0: 256
-  dropout: 0.30000000000000004
-  dense_units_1: 256
-  dense_units_2: 128
-
-Main Parameters Used:
-  File path: ./data/requests.csv
-  Test size: 0.2
-  Random state: 42
-  Max trials: 5
-  Epochs: 50
-  Batch size: 16
-  Patience for early stopping: 5
-  Minimum learning rate: 1e-05
-  Initial learning rate: 0.001
-  Dense layer min: 2
-  Dense layer max: 3
-  Dense unit choices: [128, 256]
-  Dropout min: 0.2, Dropout max: 0.5, Dropout step: 0.1
-
-Test set accuracy: 0.663
-
-Classification Report:
-               precision    recall  f1-score   support
-
-    Approved       0.74      0.53      0.62      1028
-    Rejected       0.62      0.81      0.70       972
-
-    accuracy                           0.66      2000
-   macro avg       0.68      0.67      0.66      2000
-weighted avg       0.68      0.66      0.66      2000
-
-
-
---CNN (Pytorch)
-    Main Parameters Used:
-      Test size: 0.3
-      Batch size: 32
-      Learning rate: 0.001
-      Weight decay: 0.0001
-      Epochs: 50
-      Step size for LR scheduler: 10
-      Gamma for LR scheduler: 0.5
-      Dropout rate: 0.4
-      Hidden layer size: 256
-
-    --CNN PyTorch Model
-    Test set accuracy: 0.728
-
-    Classification Report:
-              precision    recall  f1-score   support
-
-           0       0.93      0.49      0.64      1476
-           1       0.66      0.96      0.78      1524
-
-    accuracy                           0.73      3000
-   macro avg       0.79      0.72      0.71      3000
-weighted avg       0.79      0.73      0.71      3000
-
-
-
---Random Forest
-    Best Model Hyperparameters from RandomizedSearchCV:
-      n_estimators: 2000
-      min_samples_split: 5
-      min_samples_leaf: 4
-      max_depth: 30
+﻿--Random Forest
+    Best Model Hyperparameters:
+      n_estimators: 711
+      min_samples_split: 6
+      min_samples_leaf: 2
+      max_features: log2
+      max_depth: 8
       class_weight: balanced
       bootstrap: True
 
     Main Parameters Used:
-      File path: ./data/requests_balanced.csv
+      File path: ./data/requests.csv
       Test size: 0.3
       Random state: 42
       Number of iterations for RandomizedSearchCV: 50
       Cross-validation folds: 5
 
-    Best cross-validation accuracy: 0.723
-    Test set accuracy: 0.715
+    Best cross-validation accuracy: 0.817
+    Test set accuracy: 0.818
 
     Classification Report:
-              precision    recall  f1-score   support
+                  precision    recall  f1-score   support
 
-           0       0.75      0.66      0.70      1520
-           1       0.69      0.77      0.73      1480
+               0      0.999     0.622     0.767      1445
+               1      0.740     0.999     0.850      1555
 
-    accuracy                           0.71      3000
-   macro avg       0.72      0.72      0.71      3000
-weighted avg       0.72      0.71      0.71      3000
+        accuracy                          0.818      3000
+       macro avg      0.869     0.811     0.809      3000
+    weighted avg      0.865     0.818     0.810      3000
+
+
 
 
 
 --XGBoost
-    Best Model Hyperparameters from RandomizedSearchCV:
-      subsample: 0.8
-      reg_lambda: 10
-      reg_alpha: 0
-      n_estimators: 600
-      max_depth: 7
+    Best Model Hyperparameters:
+      subsample: 0.7
+      scale_pos_weight: 3
+      reg_lambda: 0
+      reg_alpha: 10
+      n_estimators: 1000
+      min_child_weight: 1
+      max_depth: 9
+      max_delta_step: 1
       learning_rate: 0.05
-      gamma: 0.2
-      colsample_bytree: 0.9
+      gamma: 0
+      colsample_bytree: 1.0
 
     Main Parameters Used:
-      File path: ./data/requests_balanced.csv
-      Test size: 0.3
+      File path: ./data/requests.csv
+      Train size: 6000
+      Validation size: 2000
+      Test size: 2000
       Random state: 42
-      Number of iterations for RandomizedSearchCV: 50
-      Cross-validation folds: 5
+      Number of parameter combinations: 200
 
-    Best cross-validation accuracy: 0.726
-    Test set accuracy: 0.713
+    Best validation accuracy: 0.833
+    Test set accuracy: 0.821
+
+    Classification Report:
+                  precision    recall  f1-score   support
+
+               0      0.953     0.675     0.790      1000
+               1      0.748     0.967     0.844      1000
+
+        accuracy                          0.821      2000
+       macro avg      0.851     0.821     0.817      2000
+    weighted avg      0.851     0.821     0.817      2000
+
+
+
+    --PyTorch CNN
+        Best Model Hyperparameters:
+          learning_rate: 0.001
+          batch_size: 32
+          dropout: 0.5
+          conv_filters: 128
+
+        Main Parameters Used:
+          File path: ./data/requests.csv
+          Train size: 8000
+          Test size: 2000
+          Random state: 42
+          Number of parameter combinations: 20
+          Epochs: 30
+
+        Best test set accuracy: 0.824
+
+        Classification Report:
+                  precision    recall  f1-score   support
+
+               0      0.970     0.668     0.791      1000
+               1      0.747     0.979     0.847      1000
+
+        accuracy                          0.824      2000
+       macro avg      0.858     0.824     0.819      2000
+    weighted avg      0.858     0.824     0.819      2000
+
+
+
+--TensorFlow CNN
+    Best Model Hyperparameters:
+      learning_rate: 0.001
+      batch_size: 128
+      dropout: 0.3
+      conv_filters: 64
+
+    Main Parameters Used:
+      File path: ./data/requests.csv
+      Train size: 8000
+      Test size: 2000
+      Random state: 42
+      Number of parameter combinations: 20
+      Epochs: 30
+
+    Best test set accuracy: 0.821
 
     Classification Report:
               precision    recall  f1-score   support
 
-           0       0.73      0.68      0.71      1520
-           1       0.70      0.74      0.72      1480
+           0      0.975     0.658     0.786      1000
+           1      0.742     0.983     0.846      1000
 
-    accuracy                           0.71      3000
-   macro avg       0.71      0.71      0.71      3000
-weighted avg       0.71      0.71      0.71      3000
+    accuracy                          0.821      2000
+   macro avg      0.858     0.821     0.816      2000
+weighted avg      0.858     0.821     0.816      2000

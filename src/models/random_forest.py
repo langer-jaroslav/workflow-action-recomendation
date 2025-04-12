@@ -1,99 +1,79 @@
 ﻿import pandas as pd
 import numpy as np
-from sklearn.model_selection import train_test_split, RandomizedSearchCV
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import accuracy_score, classification_report
-from sklearn.utils import shuffle
+from sklearn.model_selection import train_test_split, RandomizedSearchCV
+from sklearn.metrics import classification_report, accuracy_score
 
-# Parameters
-file_path = "./data/requests.csv"
-test_size = 0.3
-random_state = 42
+# ========== GLOBAL CONFIGURATION ==========
+FILE_PATH = './data/requests.csv'
+TEST_SIZE = 0.3
+RANDOM_STATE = 42
+N_ITER_SEARCH = 50
+CV_FOLDS = 5
 
-# Load dataset
-data = pd.read_csv(file_path)
+# ========== DATA LOADING & PREPROCESSING ==========
+data = pd.read_csv(FILE_PATH)
 
-# ❌ Remove `request_id` if it exists
-if "request_id" in data.columns:
-    data = data.drop(columns=["request_id"])
-    print("✅ `request_id` removed.")
+data['status'] = data['status'].map({'Approved': 1, 'Rejected': 0})
 
-# 🔀 Shuffle dataset to ensure randomness
-data = shuffle(data, random_state=random_state)
+data = data.drop(columns=['request_id', 'employee_id', 'risk_score_category'])
 
-# 📌 Feature Engineering - creating new features
-data['log_total_value'] = np.log1p(data['total_value'])  # Log transformation of total value
-data['wholesale_urgency'] = data['is_from_wholesaler'] * data['is_urgent']  # Interaction of wholesale and urgency
+data = pd.get_dummies(data, drop_first=True)
 
-# ❌ Drop weak features
-columns_to_drop = ["requested_items", "total_value", "price_per_item", "order_type_other"]
-data = data.drop(columns=[col for col in columns_to_drop if col in data.columns])
-
-# Encode target variable ('status') as binary (1 = Approved, 0 = Rejected)
-data['status'] = data['status'].apply(lambda x: 1 if x == 'Approved' else 0)
-
-# One-hot encoding for categorical variables
-X = pd.get_dummies(data.drop(columns=["status"]), drop_first=True)
+X = data.drop('status', axis=1)
 y = data['status']
 
-# Split data into training and testing sets
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=test_size, random_state=random_state)
-
-# 📌 Hyperparameter tuning - defining search space
-param_dist = {
-    'n_estimators': np.arange(1000, 2001, 200),  # Number of trees
-    'max_depth': [None, 30, 40, 50],  # Maximum depth of trees
-    'min_samples_split': [5, 10, 20],  # Minimum number of samples to split a node
-    'min_samples_leaf': [2, 4, 6],  # Minimum number of samples per leaf node
-    'bootstrap': [True, False],  # Whether to use bootstrapping
-    'class_weight': ['balanced']  # Balancing class weights
-}
-
-# RandomizedSearchCV to find the best hyperparameters
-random_search = RandomizedSearchCV(
-    estimator=RandomForestClassifier(random_state=random_state),
-    param_distributions=param_dist,
-    n_iter=50,  # Number of random hyperparameter combinations to try
-    scoring='accuracy',
-    cv=5,  # 5-fold cross-validation
-    random_state=random_state,
-    n_jobs=-1,
-    verbose=1
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=TEST_SIZE, random_state=RANDOM_STATE
 )
 
-# **Run hyperparameter tuning**
-random_search.fit(X_train, y_train)
+# ========== HYPERPARAMETER SEARCH SPACE ==========
+param_dist = {
+    'n_estimators': [int(x) for x in np.linspace(400, 800, num=10)],
+    'max_depth': [8, 10, 12, 15, 20],
+    'min_samples_split': [2, 3, 4, 5, 6],
+    'min_samples_leaf': [1, 2, 3],
+    'bootstrap': [True],
+    'class_weight': ['balanced'],
+    'max_features': ['sqrt', 'log2', None]
+}
 
-# Retrieve the best hyperparameters
-best_params_rf = random_search.best_params_
-best_score_rf = random_search.best_score_
+rf = RandomForestClassifier(random_state=RANDOM_STATE)
 
-# **Train the Random Forest model with best hyperparameters**
-best_rf_model = RandomForestClassifier(**best_params_rf, random_state=random_state)
-best_rf_model.fit(X_train, y_train)
+rf_random = RandomizedSearchCV(
+    estimator=rf,
+    param_distributions=param_dist,
+    n_iter=N_ITER_SEARCH,
+    cv=CV_FOLDS,
+    verbose=2,  
+    random_state=RANDOM_STATE,
+    n_jobs=-1,
+    scoring='accuracy'
+)
 
-# **Predictions on test data**
-y_pred_rf = best_rf_model.predict(X_test)
+# ========== MODEL TRAINING ==========
+rf_random.fit(X_train, y_train)
 
-# **Compute accuracy and classification report**
-accuracy_rf = accuracy_score(y_test, y_pred_rf)
-classification_rep_rf = classification_report(y_test, y_pred_rf)
+best_model = rf_random.best_estimator_
 
-# 📌 Print formatted results
-print("\n--Random Forest")
-print("    Best Model Hyperparameters from RandomizedSearchCV:")
-for param, value in best_params_rf.items():
-    print(f"      {param}: {value}")
+y_pred = best_model.predict(X_test)
 
-print("\n    Main Parameters Used:")
-print(f"      File path: {file_path}")
-print(f"      Test size: {test_size}")
-print(f"      Random state: {random_state}")
-print(f"      Number of iterations for RandomizedSearchCV: 50")  # Počet testovaných kombinací hyperparametrů
-print(f"      Cross-validation folds: 5")  # Počet částí (foldů) pro křížovou validaci
+# ========== OUTPUT REPORT ==========
+print("\nBest Model Hyperparameters from RandomizedSearchCV:")
+for param, value in rf_random.best_params_.items():
+    print(f"  {param}: {value}")
 
-print(f"\n    Best cross-validation accuracy: {best_score_rf:.3f}")
-print(f"    Test set accuracy: {accuracy_rf:.3f}\n")
+print(f"""
+Main Parameters Used:
+  File path: {FILE_PATH}
+  Test size: {TEST_SIZE}
+  Random state: {RANDOM_STATE}
+  Number of iterations for RandomizedSearchCV: {N_ITER_SEARCH}
+  Cross-validation folds: {CV_FOLDS}
+""")
 
-print("    Classification Report:")
-print(classification_rep_rf)
+print(f"Best cross-validation accuracy: {rf_random.best_score_:.3f}")
+print(f"Test set accuracy: {accuracy_score(y_test, y_pred):.3f}\n")
+
+print("Classification Report:")
+print(classification_report(y_test, y_pred, digits=3))
